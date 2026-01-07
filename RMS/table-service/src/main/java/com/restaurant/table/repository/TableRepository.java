@@ -1,0 +1,14 @@
+package com.restaurant.table.repository;
+
+import com.restaurant.table.entity.RestaurantTable;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import java.util.List;
+import java.util.Optional;
+
+@Repository
+public interface TableRepository extends JpaRepository<RestaurantTable, String> {
+    Optional<RestaurantTable> findByTableNumber(String tableNumber);
+    List<RestaurantTable> findByStatus(RestaurantTable.TableStatus status);
+}
