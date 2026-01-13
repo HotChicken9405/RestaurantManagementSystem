@@ -5,21 +5,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b15539a-0619-4b23-b178-86e8c11fde87" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/dbnavigator.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/material_theme_project_new.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RMS/billing-service/src/main/java/com/restaurant/billing/controller/BillingController.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RMS/billing-service/src/main/java/com/restaurant/billing/entity/Bill.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RMS/billing-service/src/main/java/com/restaurant/billing/entity/BillItem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RMS/billing-service/src/main/java/com/restaurant/billing/repository/BillItemRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RMS/billing-service/src/main/java/com/restaurant/billing/repository/BillRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RMS/billing-service/src/main/java/com/restaurant/billing/service/BillingService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/billing-service/src/main/java/com/restaurant/billing/BillingServiceApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/billing-service/src/main/java/com/restaurant/billing/BillingServiceApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/billing-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/billing-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/controller/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/controller/MenuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/controller/OrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/table-service/src/main/java/com/restaurant/table/controller/TableController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/table-service/src/main/java/com/restaurant/table/controller/TableController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/table-service/target/classes/com/restaurant/table/controller/TableController.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/table-service/target/classes/com/restaurant/table/controller/TableController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/application.properties" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -56,23 +52,57 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
-    &quot;Spring Boot.BillingServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.OrderServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;Spring Boot.UserServiceApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;Sathsarani&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/HP/Desktop/SE2/RestaurantManagementSystem&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RequestMappingsPanelOrder0": "0",
+    "RequestMappingsPanelOrder1": "1",
+    "RequestMappingsPanelWidth0": "75",
+    "RequestMappingsPanelWidth1": "75",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.TerminalTabsStorage.copyFrom.TerminalArrangementManager.252": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.typescript.service.memoryLimit.init": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Spring Boot.BillingServiceApplication.executor": "Run",
+    "Spring Boot.MenuServiceApplication.executor": "Run",
+    "Spring Boot.OrderServiceApplication.executor": "Run",
+    "Spring Boot.TableServiceApplication.executor": "Run",
+    "Spring Boot.UserServiceApplication.executor": "Run",
+    "git-widget-placeholder": "Ravisha",
+    "ignore.virus.scanning.warn.message": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/Users/HP/Desktop/RMS/RestaurantManagementSystem",
+    "run.configurations.included.in.services": "true",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
-  <component name="RunManager" selected="Application.MenuServiceApplication">
+}]]></component>
+  <component name="RunDashboard">
+    <option name="configurationTypes">
+      <set>
+        <option value="KtorApplicationConfigurationType" />
+        <option value="MicronautRunConfigurationType" />
+        <option value="QuarkusRunConfigurationType" />
+        <option value="SpringBootApplicationConfigurationType" />
+      </set>
+    </option>
+    <option name="configurationStatuses">
+      <map>
+        <entry key="SpringBootApplicationConfigurationType">
+          <value>
+            <map>
+              <entry key="MenuServiceApplication" value="STOPPED" />
+              <entry key="OrderServiceApplication" value="STOPPED" />
+              <entry key="TableServiceApplication" value="STOPPED" />
+              <entry key="UserServiceApplication" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="RunManager" selected="Spring Boot.UserServiceApplication">
     <configuration name="BillingServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.restaurant.billing.BillingServiceApplication" />
       <module name="billing-service" />
@@ -157,6 +187,8 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Spring Boot.OrderServiceApplication" />
+        <item itemvalue="Spring Boot.UserServiceApplication" />
         <item itemvalue="Application.MenuServiceApplication" />
         <item itemvalue="Application.BillingServiceApplication" />
       </list>
@@ -166,6 +198,7 @@
     <attachedChunks>
       <set>
         <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
       </set>
     </attachedChunks>
   </component>
@@ -176,7 +209,11 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1767608887872</updated>
+      <workItem from="1768326370444" duration="9321000" />
     </task>
     <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
   </component>
 </project>

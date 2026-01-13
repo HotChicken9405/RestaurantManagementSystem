@@ -5,11 +5,11 @@ import com.restaurant.table.entity.RestaurantTable;
 import com.restaurant.table.service.TableService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @RequestMapping("/api/tables")
+@CrossOrigin(origins = "http://localhost:8081")  // ← ADD THIS!
 public class TableController {
 
     @Autowired

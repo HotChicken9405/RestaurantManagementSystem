@@ -1,0 +1,1083 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chef System - Kitchen Orders</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+            min-height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ff6b6b;
+            backdrop-filter: blur(10px);
+        }
+
+        .header h1 {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 600;
+            font-size: 28px;
+        }
+
+        .header-buttons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+
+        .user-info {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 20px;
+            font-weight: 500;
+        }
+
+        .logout-btn {
+            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .logout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+        }
+
+        /* Kitchen Display */
+        .kitchen-display {
+            padding: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .display-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .display-title {
+            font-size: 32px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .controls {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .btn-refresh {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-refresh:hover:not(:disabled) {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .btn-accept {
+            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
+            color: white;
+        }
+
+        .btn-accept:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
+        }
+
+        .btn-start {
+            background: linear-gradient(135deg, #ffd166 0%, #ffb347 100%);
+            color: #333;
+        }
+
+        .btn-start:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 209, 102, 0.4);
+        }
+
+        .btn-ready {
+            background: linear-gradient(135deg, #06d6a0 0%, #05c793 100%);
+            color: white;
+        }
+
+        .btn-ready:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(6, 214, 160, 0.4);
+        }
+
+        .btn-history {
+            background: linear-gradient(135deg, #118ab2 0%, #0a7ea6 100%);
+            color: white;
+        }
+
+        .btn-history:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(17, 138, 178, 0.4);
+        }
+
+        /* Status Tabs */
+        .status-tabs {
+            display: flex;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .status-tab {
+            flex: 1;
+            padding: 18px;
+            text-align: center;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        .status-tab:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .status-tab.active {
+            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 3px solid #ff6b6b;
+        }
+
+        /* Orders Grid */
+        .orders-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+
+        .order-card {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .order-card:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .order-card.selected {
+            border: 2px solid #4ecdc4;
+            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.3);
+        }
+
+        .order-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 6px;
+            height: 100%;
+        }
+
+        .order-card.pending::before {
+            background: #ff6b6b;
+        }
+
+        .order-card.preparing::before {
+            background: #ffd166;
+        }
+
+        .order-card.ready::before {
+            background: #06d6a0;
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .order-id {
+            font-size: 18px;
+            font-weight: 700;
+            color: #4ecdc4;
+            background: rgba(78, 205, 196, 0.1);
+            padding: 6px 15px;
+            border-radius: 20px;
+            display: inline-block;
+        }
+
+        .order-status {
+            padding: 8px 18px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .status-pending {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+
+        .status-accepted {
+            background: rgba(78, 205, 196, 0.2);
+            color: #4ecdc4;
+        }
+
+        .status-preparing {
+            background: rgba(255, 209, 102, 0.2);
+            color: #ffd166;
+        }
+
+        .status-ready {
+            background: rgba(6, 214, 160, 0.2);
+            color: #06d6a0;
+        }
+
+        .order-info {
+            margin-bottom: 20px;
+        }
+
+        .order-info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .order-info-label {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+        }
+
+        .order-info-value {
+            font-weight: 600;
+            font-size: 15px;
+        }
+
+        .order-items {
+            margin-top: 20px;
+        }
+
+        .order-items-title {
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 14px;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .order-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 8px;
+            margin-bottom: 8px;
+            transition: all 0.2s;
+        }
+
+        .order-item:hover {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .item-name {
+            font-weight: 500;
+            flex: 1;
+        }
+
+        .item-quantity {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-weight: 600;
+            margin: 0 15px;
+        }
+
+        .item-status {
+            font-size: 12px;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        .item-pending {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+        }
+
+        .item-preparing {
+            background: rgba(255, 209, 102, 0.2);
+            color: #ffd166;
+        }
+
+        .item-ready {
+            background: rgba(6, 214, 160, 0.2);
+            color: #06d6a0;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        .order-action-btn {
+            flex: 1;
+            min-width: 120px;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        /* Loading & Empty States */
+        .loading {
+            text-align: center;
+            padding: 60px;
+            grid-column: 1 / -1;
+        }
+
+        .loading-spinner {
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top: 4px solid #4ecdc4;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 20px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px;
+            grid-column: 1 / -1;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .empty-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            opacity: 0.3;
+        }
+
+        /* Timer */
+        .order-timer {
+            background: rgba(255, 107, 107, 0.1);
+            padding: 10px 15px;
+            border-radius: 10px;
+            margin-top: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .timer-icon {
+            color: #ff6b6b;
+        }
+
+        /* Messages */
+        .message {
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            display: none;
+            animation: slideIn 0.5s ease;
+            border: 1px solid;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .message.success {
+            background: rgba(6, 214, 160, 0.1);
+            color: #06d6a0;
+            border-color: rgba(6, 214, 160, 0.3);
+        }
+
+        .message.error {
+            background: rgba(255, 107, 107, 0.1);
+            color: #ff6b6b;
+            border-color: rgba(255, 107, 107, 0.3);
+        }
+
+        /* Notification Badge */
+        .notification-badge {
+            background: #ff6b6b;
+            color: white;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-size: 12px;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .orders-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .header-buttons {
+                flex-direction: column;
+                width: 100%;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .controls {
+                width: 100%;
+            }
+
+            .status-tabs {
+                flex-direction: column;
+            }
+        }
+
+        /* Kitchen Clock */
+        .kitchen-clock {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-family: 'Courier New', monospace;
+            font-size: 24px;
+            font-weight: 700;
+            color: #4ecdc4;
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            margin-left: 20px;
+        }
+
+        /* Selected Order Highlight */
+        .selected-order-info {
+            background: rgba(78, 205, 196, 0.1);
+            border: 2px solid rgba(78, 205, 196, 0.3);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 30px;
+            display: none;
+        }
+
+        .selected-order-info.show {
+            display: block;
+            animation: slideIn 0.5s ease;
+        }
+
+        .selected-order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .selected-order-title {
+            font-size: 24px;
+            font-weight: 700;
+            color: #4ecdc4;
+        }
+
+        .clear-selection {
+            background: rgba(255, 107, 107, 0.2);
+            color: #ff6b6b;
+            border: 1px solid rgba(255, 107, 107, 0.3);
+            padding: 8px 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .clear-selection:hover {
+            background: rgba(255, 107, 107, 0.3);
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+    <h1>
+        👨‍🍳 KITCHEN DISPLAY SYSTEM
+        <div class="kitchen-clock" id="kitchenClock">00:00:00</div>
+    </h1>
+
+    <div class="header-buttons">
+        <div class="user-info" id="welcomeUser">Chef: Master Chef</div>
+        <button class="logout-btn" onclick="logout()">
+            🚪 Logout
+        </button>
+    </div>
+</div>
+
+<!-- Kitchen Display -->
+<div class="kitchen-display">
+    <!-- Messages -->
+    <div id="successMessage" class="message success"></div>
+    <div id="errorMessage" class="message error"></div>
+
+    <!-- Display Header -->
+    <div class="display-header">
+        <div class="display-title">
+            📋 KITCHEN ORDERS
+            <div id="pendingCount" class="notification-badge">0</div>
+        </div>
+
+        <div class="controls">
+            <button class="btn btn-refresh" onclick="loadOrders()" id="btnRefresh">
+                🔄 Refresh Orders
+            </button>
+            <button class="btn btn-history" onclick="showOrderHistory()">
+                📊 Order History
+            </button>
+        </div>
+    </div>
+
+    <!-- Status Tabs -->
+    <div class="status-tabs">
+        <div class="status-tab active" onclick="filterOrders('PENDING')">
+            ⏳ PENDING <span id="pendingTabCount" class="notification-badge">0</span>
+        </div>
+        <div class="status-tab" onclick="filterOrders('PREPARING')">
+            🔥 PREPARING <span id="preparingTabCount" class="notification-badge">0</span>
+        </div>
+        <div class="status-tab" onclick="filterOrders('READY')">
+            ✅ READY <span id="readyTabCount" class="notification-badge">0</span>
+        </div>
+    </div>
+
+    <!-- Selected Order Actions -->
+    <div id="selectedOrderInfo" class="selected-order-info">
+        <div class="selected-order-header">
+            <div class="selected-order-title" id="selectedOrderTitle">
+                SELECTED ORDER: #<span id="selectedOrderId">NONE</span>
+            </div>
+            <button class="clear-selection" onclick="clearSelection()">
+                ✕ Clear Selection
+            </button>
+        </div>
+
+        <div style="display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
+            <button class="btn btn-accept" onclick="acceptSelectedOrder()" id="btnAccept">
+                ✅ Accept Order
+            </button>
+            <button class="btn btn-start" onclick="startPreparingOrder()" id="btnStart">
+                🔥 Start Preparing
+            </button>
+            <button class="btn btn-ready" onclick="markOrderReady()" id="btnReady">
+                🎯 Mark as Ready
+            </button>
+        </div>
+    </div>
+
+    <!-- Orders Grid -->
+    <div id="loading" class="loading">
+        <div class="loading-spinner"></div>
+        <div style="margin-top: 20px; font-size: 18px; color: rgba(255, 255, 255, 0.7);">
+            Loading kitchen orders...
+        </div>
+    </div>
+
+    <div id="ordersGrid" class="orders-grid" style="display: none;"></div>
+
+    <div id="emptyState" class="empty-state" style="display: none;">
+        <div class="empty-icon">🍳</div>
+        <h3 style="margin-bottom: 10px; color: rgba(255, 255, 255, 0.7);">
+            No orders in this status
+        </h3>
+        <p style="color: rgba(255, 255, 255, 0.5);">
+            Orders will appear here when waiters place them
+        </p>
+    </div>
+</div>
+
+<!-- JavaScript -->
+<script>
+    // Global variables
+    let currentUser = null;
+    let allOrders = [];
+    let selectedOrder = null;
+    let currentFilter = 'PENDING';
+    let refreshInterval = null;
+
+    // ==================== INITIALIZATION ====================
+    document.addEventListener('DOMContentLoaded', function() {
+        checkLoginStatus();
+        startKitchenClock();
+        startAutoRefresh();
+    });
+
+    function checkLoginStatus() {
+        const userData = localStorage.getItem('restaurantUser');
+        if (!userData) {
+            window.location.href = '/';
+            return;
+        }
+
+        try {
+            currentUser = JSON.parse(userData);
+
+            // Check if user is a chef
+            if (currentUser.role !== 'CHEF') {
+                localStorage.removeItem('restaurantUser');
+                showError('Access denied. Only chefs can access kitchen system.');
+                setTimeout(() => window.location.href = '/', 2000);
+                return;
+            }
+
+            // Update welcome message
+            document.getElementById('welcomeUser').textContent = `Chef: ${currentUser.fullName}`;
+
+            // Load initial orders
+            loadOrders();
+        } catch (error) {
+            localStorage.removeItem('restaurantUser');
+            window.location.href = '/';
+        }
+    }
+
+    // ==================== ORDER MANAGEMENT ====================
+    async function loadOrders() {
+        const loading = document.getElementById('loading');
+        const ordersGrid = document.getElementById('ordersGrid');
+        const emptyState = document.getElementById('emptyState');
+        const btnRefresh = document.getElementById('btnRefresh');
+
+        // Show loading, hide others
+        loading.style.display = 'block';
+        ordersGrid.style.display = 'none';
+        emptyState.style.display = 'none';
+        btnRefresh.disabled = true;
+        btnRefresh.innerHTML = '🔄 Loading...';
+
+        try {
+            const response = await fetch('http://localhost:8084/api/orders');
+            if (response.ok) {
+                allOrders = await response.json();
+                displayOrders();
+                updateOrderCounts();
+            } else {
+                showError('Failed to load orders. Please check if Order Service is running.');
+            }
+        } catch (error) {
+            showError('Error connecting to Order Service. Make sure it\'s running on port 8084.');
+        } finally {
+            btnRefresh.disabled = false;
+            btnRefresh.innerHTML = '🔄 Refresh Orders';
+        }
+    }
+
+    function displayOrders() {
+        const ordersGrid = document.getElementById('ordersGrid');
+        const loading = document.getElementById('loading');
+        const emptyState = document.getElementById('emptyState');
+
+        loading.style.display = 'none';
+
+        // Filter orders based on current tab
+        const filteredOrders = allOrders.filter(order => order.status === currentFilter);
+
+        if (filteredOrders.length === 0) {
+            ordersGrid.style.display = 'none';
+            emptyState.style.display = 'block';
+            return;
+        }
+
+        ordersGrid.innerHTML = '';
+        emptyState.style.display = 'none';
+
+        filteredOrders.forEach(order => {
+            const orderCard = document.createElement('div');
+            orderCard.className = `order-card ${order.status.toLowerCase()}`;
+            orderCard.onclick = () => selectOrder(order);
+            orderCard.dataset.orderId = order.orderId;
+
+            if (selectedOrder && selectedOrder.orderId === order.orderId) {
+                orderCard.classList.add('selected');
+            }
+
+            // Calculate waiting time
+            const orderedTime = new Date(order.createdAt);
+            const now = new Date();
+            const waitingMinutes = Math.floor((now - orderedTime) / (1000 * 60));
+
+            orderCard.innerHTML = `
+                <div class="order-header">
+                    <div class="order-id">ORDER #${order.orderId.substring(0, 8)}</div>
+                    <div class="order-status status-${order.status.toLowerCase()}">
+                        ${order.status}
+                    </div>
+                </div>
+
+                <div class="order-info">
+                    <div class="order-info-row">
+                        <div class="order-info-label">Table</div>
+                        <div class="order-info-value">${order.tableId || 'N/A'}</div>
+                    </div>
+                    <div class="order-info-row">
+                        <div class="order-info-label">Order Time</div>
+                        <div class="order-info-value">${orderedTime.toLocaleTimeString()}</div>
+                    </div>
+                    <div class="order-info-row">
+                        <div class="order-info-label">Total Amount</div>
+                        <div class="order-info-value">Rs. ${order.totalAmount?.toFixed(2) || '0.00'}</div>
+                    </div>
+                </div>
+
+                ${waitingMinutes > 0 ? `
+                    <div class="order-timer">
+                        <span class="timer-icon">⏱️</span>
+                        Waiting: <strong>${waitingMinutes} minutes</strong>
+                    </div>
+                ` : ''}
+
+                <div class="order-actions">
+                    ${order.status === 'PENDING' ? `
+                        <button class="btn btn-accept order-action-btn" onclick="acceptOrder('${order.orderId}')">
+                            ✅ Accept
+                        </button>
+                    ` : ''}
+
+                    ${order.status === 'ACCEPTED' ? `
+                        <button class="btn btn-start order-action-btn" onclick="startPreparingOrder('${order.orderId}')">
+                            🔥 Start Cooking
+                        </button>
+                    ` : ''}
+
+                    ${order.status === 'PREPARING' ? `
+                        <button class="btn btn-ready order-action-btn" onclick="markOrderReady('${order.orderId}')">
+                            ✅ Mark Ready
+                        </button>
+                    ` : ''}
+
+                    ${order.status === 'READY' ? `
+                        <button class="btn order-action-btn" style="background: rgba(6, 214, 160, 0.2); color: #06d6a0;" disabled>
+                            ✅ Ready for Pickup
+                        </button>
+                    ` : ''}
+                </div>
+            `;
+
+            ordersGrid.appendChild(orderCard);
+        });
+
+        ordersGrid.style.display = 'grid';
+    }
+
+    function updateOrderCounts() {
+        const pendingCount = allOrders.filter(o => o.status === 'PENDING').length;
+        const preparingCount = allOrders.filter(o => o.status === 'PREPARING').length;
+        const readyCount = allOrders.filter(o => o.status === 'READY').length;
+
+        // Update badges
+        document.getElementById('pendingCount').textContent = pendingCount;
+        document.getElementById('pendingTabCount').textContent = pendingCount;
+        document.getElementById('preparingTabCount').textContent = preparingCount;
+        document.getElementById('readyTabCount').textContent = readyCount;
+
+        // Update tab colors based on count
+        const pendingTab = document.querySelector('[onclick="filterOrders(\'PENDING\')"]');
+        const preparingTab = document.querySelector('[onclick="filterOrders(\'PREPARING\')"]');
+        const readyTab = document.querySelector('[onclick="filterOrders(\'READY\')"]');
+
+        // Reset all
+        pendingTab.style.color = '';
+        preparingTab.style.color = '';
+        readyTab.style.color = '';
+
+        // Highlight if has orders
+        if (pendingCount > 0) {
+            pendingTab.style.color = '#ff6b6b';
+        }
+        if (preparingCount > 0) {
+            preparingTab.style.color = '#ffd166';
+        }
+        if (readyCount > 0) {
+            readyTab.style.color = '#06d6a0';
+        }
+    }
+
+    function filterOrders(status) {
+        currentFilter = status;
+
+        // Update tabs
+        document.querySelectorAll('.status-tab').forEach(tab => tab.classList.remove('active'));
+        event.target.classList.add('active');
+
+        // Display filtered orders
+        displayOrders();
+
+        // Hide selected order info if not in current filter
+        if (selectedOrder && selectedOrder.status !== status) {
+            clearSelection();
+        }
+    }
+
+    function selectOrder(order) {
+        // Deselect previous order
+        document.querySelectorAll('.order-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+
+        // Select new order
+        selectedOrder = order;
+        event.currentTarget.classList.add('selected');
+
+        // Show selected order info
+        const selectedInfo = document.getElementById('selectedOrderInfo');
+        const selectedOrderId = document.getElementById('selectedOrderId');
+        const btnAccept = document.getElementById('btnAccept');
+        const btnStart = document.getElementById('btnStart');
+        const btnReady = document.getElementById('btnReady');
+
+        selectedOrderId.textContent = order.orderId.substring(0, 8);
+        selectedInfo.classList.add('show');
+
+        // Update button states based on order status
+        btnAccept.disabled = order.status !== 'PENDING';
+        btnStart.disabled = order.status !== 'ACCEPTED';
+        btnReady.disabled = order.status !== 'PREPARING';
+    }
+
+    function clearSelection() {
+        selectedOrder = null;
+        document.querySelectorAll('.order-card').forEach(card => {
+            card.classList.remove('selected');
+        });
+        document.getElementById('selectedOrderInfo').classList.remove('show');
+    }
+
+    // ==================== ORDER ACTIONS ====================
+    async function acceptOrder(orderId) {
+        try {
+            const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/ACCEPTED`, {
+                method: 'PUT'
+            });
+
+            if (response.ok) {
+                showSuccess('Order accepted and moved to preparing');
+                await loadOrders();
+            } else {
+                showError('Failed to accept order');
+            }
+        } catch (error) {
+            showError('Error accepting order: ' + error.message);
+        }
+    }
+
+    async function startPreparingOrder(orderId) {
+        try {
+            const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/PREPARING`, {
+                method: 'PUT'
+            });
+
+            if (response.ok) {
+                showSuccess('Order marked as preparing');
+                await loadOrders();
+            } else {
+                showError('Failed to update order status');
+            }
+        } catch (error) {
+            showError('Error updating order: ' + error.message);
+        }
+    }
+
+    async function markOrderReady(orderId) {
+        try {
+            const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/READY`, {
+                method: 'PUT'
+            });
+
+            if (response.ok) {
+                showSuccess('✅ Order marked as READY! Waiters will pick it up.');
+                await loadOrders();
+            } else {
+                showError('Failed to mark order as ready');
+            }
+        } catch (error) {
+            showError('Error updating order: ' + error.message);
+        }
+    }
+
+    // Selected order actions
+    async function acceptSelectedOrder() {
+        if (!selectedOrder) return;
+        await acceptOrder(selectedOrder.orderId);
+        clearSelection();
+    }
+
+    async function startPreparingOrder() {
+        if (!selectedOrder) return;
+        await startPreparingOrder(selectedOrder.orderId);
+        clearSelection();
+    }
+
+    async function markOrderReady() {
+        if (!selectedOrder) return;
+        await markOrderReady(selectedOrder.orderId);
+        clearSelection();
+    }
+
+    // ==================== UTILITY FUNCTIONS ====================
+    function showSuccess(message) {
+        const element = document.getElementById('successMessage');
+        element.textContent = message;
+        element.style.display = 'block';
+        setTimeout(() => element.style.display = 'none', 5000);
+    }
+
+    function showError(message) {
+        const element = document.getElementById('errorMessage');
+        element.textContent = message;
+        element.style.display = 'block';
+        setTimeout(() => element.style.display = 'none', 5000);
+    }
+
+    function logout() {
+        localStorage.removeItem('restaurantUser');
+        window.location.href = '/';
+    }
+
+    function showOrderHistory() {
+        alert('Order history feature will be implemented in the next version!');
+    }
+
+    // ==================== KITCHEN CLOCK ====================
+    function startKitchenClock() {
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('en-US', { hour12: false });
+            document.getElementById('kitchenClock').textContent = timeString;
+        }
+
+        updateClock();
+        setInterval(updateClock, 1000);
+    }
+
+    // ==================== AUTO REFRESH ====================
+    function startAutoRefresh() {
+        // Refresh every 30 seconds
+        refreshInterval = setInterval(() => {
+            loadOrders();
+        }, 30000);
+    }
+
+    // Stop auto refresh when page is hidden
+    document.addEventListener('visibilitychange', function() {
+        if (document.hidden) {
+            clearInterval(refreshInterval);
+        } else {
+            startAutoRefresh();
+        }
+    });
+
+    // ==================== KEYBOARD SHORTCUTS ====================
+    document.addEventListener('keydown', function(event) {
+        if (!selectedOrder) return;
+
+        switch(event.key) {
+            case '1': // Accept order
+            case 'a':
+                if (!event.ctrlKey) acceptSelectedOrder();
+                break;
+            case '2': // Start preparing
+            case 's':
+                if (!event.ctrlKey) startPreparingOrder();
+                break;
+            case '3': // Mark ready
+            case 'd':
+                if (!event.ctrlKey) markOrderReady();
+                break;
+            case 'Escape':
+                clearSelection();
+                break;
+            case 'r':
+                if (event.ctrlKey) {
+                    event.preventDefault();
+                    loadOrders();
+                }
+                break;
+        }
+    });
+</script>
+</body>
+</html>

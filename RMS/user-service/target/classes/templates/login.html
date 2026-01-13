@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Management System - Login</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .login-container {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 10px;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+            font-weight: 600;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            color: #555;
+            font-weight: 500;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border 0.3s;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .login-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            padding: 14px;
+            width: 100%;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.3s, box-shadow 0.3s;
+            margin-top: 10px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 7px 14px rgba(102, 126, 234, 0.4);
+        }
+
+        .login-btn:active {
+            transform: translateY(0);
+        }
+
+        .error-message {
+            color: #e74c3c;
+            background: #fde8e8;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+            display: none;
+            font-weight: 500;
+        }
+
+        .demo-credentials {
+            margin-top: 25px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            text-align: left;
+        }
+
+        .demo-credentials h3 {
+            color: #555;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .demo-credentials ul {
+            list-style: none;
+            font-size: 13px;
+            color: #666;
+        }
+
+        .demo-credentials li {
+            margin-bottom: 5px;
+            padding-left: 15px;
+            position: relative;
+        }
+
+        .demo-credentials li:before {
+            content: "•";
+            color: #667eea;
+            position: absolute;
+            left: 0;
+        }
+
+        .role-tag {
+            display: inline-block;
+            background: #e0e7ff;
+            color: #667eea;
+            padding: 2px 8px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-left: 5px;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="logo">🍽️</div>
+    <h1>Restaurant Management System</h1>
+
+    <form id="loginForm">
+        <div class="input-group">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter your username" required>
+        </div>
+
+        <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your password" required>
+        </div>
+
+        <button type="submit" class="login-btn">Login</button>
+    </form>
+
+    <div id="errorMessage" class="error-message"></div>
+
+    <div class="demo-credentials">
+        <h3>Demo Credentials (All passwords: 1234)</h3>
+        <ul>
+            <li>chef <span class="role-tag">CHEF</span></li>
+            <li>waiter1 <span class="role-tag">WAITER</span></li>
+            <li>waiter2 <span class="role-tag">WAITER</span></li>
+            <li>cashier <span class="role-tag">CASHIER</span></li>
+            <li>manager <span class="role-tag">MANAGER</span></li>
+        </ul>
+    </div>
+</div>
+
+<script>
+    document.getElementById('loginForm').addEventListener('submit', async function(event) {
+        event.preventDefault();
+
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        const errorElement = document.getElementById('errorMessage');
+
+        // Clear previous error
+        errorElement.style.display = 'none';
+        errorElement.textContent = '';
+
+        // Basic validation
+        if (!username || !password) {
+            showError('Please enter both username and password');
+            return;
+        }
+
+        try {
+            // Show loading state
+            const loginBtn = document.querySelector('.login-btn');
+            const originalText = loginBtn.textContent;
+            loginBtn.textContent = 'Logging in...';
+            loginBtn.disabled = true;
+
+            // Call login API
+            const response = await fetch('http://localhost:8081/api/users/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            });
+
+            if (response.ok) {
+                const user = await response.json();
+
+                // ✅ CRITICAL FIX: SAVE USER TO LOCALSTORAGE
+                localStorage.setItem('restaurantUser', JSON.stringify(user));
+                console.log('✅ User saved to localStorage:', user.username, 'Role:', user.role);
+
+                // Redirect based on role
+                switch(user.role) {
+                    case 'WAITER':
+                        window.location.href = '/waiter-system';
+                        break;
+                    case 'CHEF':
+                        window.location.href = '/chef-system';
+                        break;
+                    case 'CASHIER':
+                        window.location.href = '/cashier-system';
+                        break;
+                    case 'MANAGER':
+                        window.location.href = '/manager-system';
+                        break;
+                    default:
+                        showError('Unknown user role');
+                }
+            } else {
+                const errorData = await response.text();
+                showError(errorData || 'Invalid username or password');
+            }
+
+        } catch (error) {
+            showError('Network error. Please check if server is running.');
+            console.error('Login error:', error);
+        } finally {
+            // Reset button
+            const loginBtn = document.querySelector('.login-btn');
+            loginBtn.textContent = 'Login';
+            loginBtn.disabled = false;
+        }
+    });
+
+    function showError(message) {
+        const errorElement = document.getElementById('errorMessage');
+        errorElement.textContent = message;
+        errorElement.style.display = 'block';
+    }
+
+    // Auto-fill demo credentials for testing
+    document.getElementById('username').addEventListener('focus', function() {
+        // Pre-fill with chef for easy testing
+        if (!this.value) {
+            this.value = 'chef';
+            document.getElementById('password').value = '1234';
+        }
+    });
+
+    // ✅ ADD: Check if already logged in
+    document.addEventListener('DOMContentLoaded', function() {
+        const userData = localStorage.getItem('restaurantUser');
+        if (userData) {
+            const user = JSON.parse(userData);
+            console.log('Already logged in as:', user.username);
+
+            // Auto-redirect based on role
+            switch(user.role) {
+                case 'WAITER':
+                    window.location.href = '/waiter-system';
+                    break;
+                case 'CHEF':
+                    window.location.href = '/chef-system';
+                    break;
+                case 'CASHIER':
+                    window.location.href = '/cashier-system';
+                    break;
+                case 'MANAGER':
+                    window.location.href = '/manager-system';
+                    break;
+            }
+        }
+    });
+</script>
+</body>
+</html>
