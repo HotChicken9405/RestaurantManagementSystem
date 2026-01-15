@@ -2,7 +2,6 @@ package com.restaurant.billing.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 import java.math.BigDecimal;
 
 @Entity

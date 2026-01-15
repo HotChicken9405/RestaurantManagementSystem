@@ -643,7 +643,7 @@
             <button class="btn btn-start" onclick="startPreparingOrder()" id="btnStart">
                 🔥 Start Preparing
             </button>
-            <button class="btn btn-ready" onclick="markOrderReady()" id="btnReady">
+            <button class="btn btn-ready" onclick="markSelectedOrderReady()" id="btnReady">
                 🎯 Mark as Ready
             </button>
         </div>
@@ -699,8 +699,7 @@
             // Check if user is a chef
             if (currentUser.role !== 'CHEF') {
                 localStorage.removeItem('restaurantUser');
-                showError('Access denied. Only chefs can access kitchen system.');
-                setTimeout(() => window.location.href = '/', 2000);
+                window.location.href = '/';
                 return;
             }
 
@@ -733,6 +732,7 @@
             const response = await fetch('http://localhost:8084/api/orders');
             if (response.ok) {
                 allOrders = await response.json();
+                console.log('Loaded orders:', allOrders); // Debug
                 displayOrders();
                 updateOrderCounts();
             } else {
@@ -754,7 +754,15 @@
         loading.style.display = 'none';
 
         // Filter orders based on current tab
-        const filteredOrders = allOrders.filter(order => order.status === currentFilter);
+        const filteredOrders = allOrders.filter(order => {
+            console.log('Order:', order.orderId, 'Status:', order.status); // Debug
+            if (currentFilter === 'PENDING') return order.status === 'PENDING';
+            if (currentFilter === 'PREPARING') return order.status === 'PREPARING' || order.status === 'ACCEPTED';
+            if (currentFilter === 'READY') return order.status === 'READY';
+            return true;
+        });
+
+        console.log('Filtered orders for', currentFilter + ':', filteredOrders.length); // Debug
 
         if (filteredOrders.length === 0) {
             ordersGrid.style.display = 'none';
@@ -780,62 +788,66 @@
             const now = new Date();
             const waitingMinutes = Math.floor((now - orderedTime) / (1000 * 60));
 
+            // Determine display status
+            let displayStatus = order.status;
+            let displayClass = order.status.toLowerCase();
+
+            // Show ACCEPTED orders as PREPARING in UI
+            if (order.status === 'ACCEPTED') {
+                displayStatus = 'PREPARING';
+                displayClass = 'preparing';
+            }
+
             orderCard.innerHTML = `
-                <div class="order-header">
-                    <div class="order-id">ORDER #${order.orderId.substring(0, 8)}</div>
-                    <div class="order-status status-${order.status.toLowerCase()}">
-                        ${order.status}
-                    </div>
+            <div class="order-header">
+                <div class="order-id">ORDER #${order.orderId.substring(0, 8)}</div>
+                <div class="order-status status-${displayClass}">
+                    ${displayStatus}
                 </div>
+            </div>
 
-                <div class="order-info">
-                    <div class="order-info-row">
-                        <div class="order-info-label">Table</div>
-                        <div class="order-info-value">${order.tableId || 'N/A'}</div>
-                    </div>
-                    <div class="order-info-row">
-                        <div class="order-info-label">Order Time</div>
-                        <div class="order-info-value">${orderedTime.toLocaleTimeString()}</div>
-                    </div>
-                    <div class="order-info-row">
-                        <div class="order-info-label">Total Amount</div>
-                        <div class="order-info-value">Rs. ${order.totalAmount?.toFixed(2) || '0.00'}</div>
-                    </div>
+            <div class="order-info">
+                <div class="order-info-row">
+                    <div class="order-info-label">Table</div>
+                    <div class="order-info-value">${order.tableId || 'N/A'}</div>
                 </div>
+                <div class="order-info-row">
+                    <div class="order-info-label">Order Time</div>
+                    <div class="order-info-value">${orderedTime.toLocaleTimeString()}</div>
+                </div>
+                <div class="order-info-row">
+                    <div class="order-info-label">Total Amount</div>
+                    <div class="order-info-value">Rs. ${order.totalAmount?.toFixed(2) || '0.00'}</div>
+                </div>
+            </div>
 
-                ${waitingMinutes > 0 ? `
-                    <div class="order-timer">
-                        <span class="timer-icon">⏱️</span>
-                        Waiting: <strong>${waitingMinutes} minutes</strong>
-                    </div>
+            ${waitingMinutes > 0 ? `
+                <div class="order-timer">
+                    <span class="timer-icon">⏱️</span>
+                    Waiting: <strong>${waitingMinutes} minutes</strong>
+                </div>
+            ` : ''}
+
+            <div class="order-actions">
+                ${order.status === 'PENDING' ? `
+                    <button class="btn btn-accept order-action-btn" onclick="acceptOrder('${order.orderId}')">
+                        ✅ Accept & Start Cooking
+                    </button>
                 ` : ''}
 
-                <div class="order-actions">
-                    ${order.status === 'PENDING' ? `
-                        <button class="btn btn-accept order-action-btn" onclick="acceptOrder('${order.orderId}')">
-                            ✅ Accept
-                        </button>
-                    ` : ''}
+                ${(order.status === 'PREPARING' || order.status === 'ACCEPTED') ? `
+                    <button class="btn btn-ready order-action-btn" onclick="markOrderReady('${order.orderId}')">
+                        ✅ Mark Ready
+                    </button>
+                ` : ''}
 
-                    ${order.status === 'ACCEPTED' ? `
-                        <button class="btn btn-start order-action-btn" onclick="startPreparingOrder('${order.orderId}')">
-                            🔥 Start Cooking
-                        </button>
-                    ` : ''}
-
-                    ${order.status === 'PREPARING' ? `
-                        <button class="btn btn-ready order-action-btn" onclick="markOrderReady('${order.orderId}')">
-                            ✅ Mark Ready
-                        </button>
-                    ` : ''}
-
-                    ${order.status === 'READY' ? `
-                        <button class="btn order-action-btn" style="background: rgba(6, 214, 160, 0.2); color: #06d6a0;" disabled>
-                            ✅ Ready for Pickup
-                        </button>
-                    ` : ''}
-                </div>
-            `;
+                ${order.status === 'READY' ? `
+                    <button class="btn order-action-btn" style="background: rgba(6, 214, 160, 0.2); color: #06d6a0;" disabled>
+                        ✅ Ready for Pickup
+                    </button>
+                ` : ''}
+            </div>
+        `;
 
             ordersGrid.appendChild(orderCard);
         });
@@ -845,8 +857,10 @@
 
     function updateOrderCounts() {
         const pendingCount = allOrders.filter(o => o.status === 'PENDING').length;
-        const preparingCount = allOrders.filter(o => o.status === 'PREPARING').length;
+        const preparingCount = allOrders.filter(o => o.status === 'PREPARING' || o.status === 'ACCEPTED').length;
         const readyCount = allOrders.filter(o => o.status === 'READY').length;
+
+        console.log('Counts - Pending:', pendingCount, 'Preparing:', preparingCount, 'Ready:', readyCount); // Debug
 
         // Update badges
         document.getElementById('pendingCount').textContent = pendingCount;
@@ -887,8 +901,16 @@
         displayOrders();
 
         // Hide selected order info if not in current filter
-        if (selectedOrder && selectedOrder.status !== status) {
-            clearSelection();
+        if (selectedOrder) {
+            const orderStatus = selectedOrder.status;
+            const shouldShow =
+                (status === 'PENDING' && orderStatus === 'PENDING') ||
+                (status === 'PREPARING' && (orderStatus === 'PREPARING' || orderStatus === 'ACCEPTED')) ||
+                (status === 'READY' && orderStatus === 'READY');
+
+            if (!shouldShow) {
+                clearSelection();
+            }
         }
     }
 
@@ -914,8 +936,16 @@
 
         // Update button states based on order status
         btnAccept.disabled = order.status !== 'PENDING';
-        btnStart.disabled = order.status !== 'ACCEPTED';
-        btnReady.disabled = order.status !== 'PREPARING';
+        btnStart.style.display = 'none'; // Hide start button
+        btnReady.disabled = !(order.status === 'PREPARING' || order.status === 'ACCEPTED');
+
+        // Update button text
+        if (order.status === 'PENDING') {
+            btnAccept.textContent = '✅ Accept & Start Cooking';
+        } else if (order.status === 'PREPARING' || order.status === 'ACCEPTED') {
+            btnAccept.style.display = 'none';
+            btnReady.textContent = '✅ Mark Ready';
+        }
     }
 
     function clearSelection() {
@@ -929,49 +959,48 @@
     // ==================== ORDER ACTIONS ====================
     async function acceptOrder(orderId) {
         try {
-            const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/ACCEPTED`, {
+            console.log('Accepting order:', orderId); // Debug
+            const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/PREPARING`, {
                 method: 'PUT'
             });
 
             if (response.ok) {
-                showSuccess('Order accepted and moved to preparing');
+                showSuccess('✅ Order accepted and cooking started!');
+                // Reload orders and auto-switch to PREPARING tab
                 await loadOrders();
+                // Find and click the PREPARING tab
+                const preparingTab = document.querySelector('[onclick="filterOrders(\'PREPARING\')"]');
+                if (preparingTab) {
+                    preparingTab.click();
+                }
             } else {
-                showError('Failed to accept order');
+                const errorText = await response.text();
+                showError('Failed to accept order: ' + errorText);
             }
         } catch (error) {
             showError('Error accepting order: ' + error.message);
         }
     }
 
-    async function startPreparingOrder(orderId) {
-        try {
-            const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/PREPARING`, {
-                method: 'PUT'
-            });
-
-            if (response.ok) {
-                showSuccess('Order marked as preparing');
-                await loadOrders();
-            } else {
-                showError('Failed to update order status');
-            }
-        } catch (error) {
-            showError('Error updating order: ' + error.message);
-        }
-    }
-
     async function markOrderReady(orderId) {
         try {
+            console.log('Marking order ready:', orderId); // Debug
             const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/READY`, {
                 method: 'PUT'
             });
 
             if (response.ok) {
                 showSuccess('✅ Order marked as READY! Waiters will pick it up.');
+                // Reload orders and auto-switch to READY tab
                 await loadOrders();
+                // Find and click the READY tab
+                const readyTab = document.querySelector('[onclick="filterOrders(\'READY\')"]');
+                if (readyTab) {
+                    readyTab.click();
+                }
             } else {
-                showError('Failed to mark order as ready');
+                const errorText = await response.text();
+                showError('Failed to mark order as ready: ' + errorText);
             }
         } catch (error) {
             showError('Error updating order: ' + error.message);
@@ -985,13 +1014,7 @@
         clearSelection();
     }
 
-    async function startPreparingOrder() {
-        if (!selectedOrder) return;
-        await startPreparingOrder(selectedOrder.orderId);
-        clearSelection();
-    }
-
-    async function markOrderReady() {
+    async function markSelectedOrderReady() {
         if (!selectedOrder) return;
         await markOrderReady(selectedOrder.orderId);
         clearSelection();
@@ -1057,15 +1080,17 @@
         switch(event.key) {
             case '1': // Accept order
             case 'a':
-                if (!event.ctrlKey) acceptSelectedOrder();
-                break;
-            case '2': // Start preparing
-            case 's':
-                if (!event.ctrlKey) startPreparingOrder();
+                if (!event.ctrlKey && !event.altKey) {
+                    event.preventDefault();
+                    acceptSelectedOrder();
+                }
                 break;
             case '3': // Mark ready
             case 'd':
-                if (!event.ctrlKey) markOrderReady();
+                if (!event.ctrlKey && !event.altKey) {
+                    event.preventDefault();
+                    markSelectedOrderReady();
+                }
                 break;
             case 'Escape':
                 clearSelection();
