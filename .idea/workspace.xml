@@ -6,21 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="8b15539a-0619-4b23-b178-86e8c11fde87" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/entity/Order.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/entity/Order.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/repository/OrderRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/repository/OrderRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/controller/OrderController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/entity/Order$OrderStatus.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/entity/Order$OrderStatus.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/entity/Order.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/entity/Order.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/repository/OrderRepository.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/repository/OrderRepository.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/service/OrderService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/cashier-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/cashier-system.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/chef-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/chef-system.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/waiter-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/waiter-system.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/cashier-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/cashier-system.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/chef-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/chef-system.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/waiter-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/waiter-system.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -198,8 +183,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Spring Boot.UserServiceApplication" />
-        <item itemvalue="Spring Boot.BillingServiceApplication" />
         <item itemvalue="Spring Boot.OrderServiceApplication" />
+        <item itemvalue="Spring Boot.BillingServiceApplication" />
         <item itemvalue="Application.MenuServiceApplication" />
         <item itemvalue="Application.BillingServiceApplication" />
       </list>
@@ -223,7 +208,7 @@
       <workItem from="1768326370444" duration="9321000" />
       <workItem from="1768466023375" duration="35000" />
       <workItem from="1768466072838" duration="7058000" />
-      <workItem from="1768485867514" duration="4407000" />
+      <workItem from="1768485867514" duration="9619000" />
     </task>
     <servers />
   </component>
