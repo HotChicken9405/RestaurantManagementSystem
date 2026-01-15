@@ -649,8 +649,7 @@
             // Check if user is a waiter
             if (currentUser.role !== 'WAITER') {
                 localStorage.removeItem('restaurantUser');
-                showError('Access denied. Only waiters can access this system.');
-                setTimeout(() => window.location.href = '/', 2000);
+                window.location.href = '/';
                 return;
             }
 
@@ -673,9 +672,7 @@
         ]);
     }
 
-
     function switchTab(tabName, clickEvent) {
-
         const event = clickEvent || window.event;
         if (event) event.stopPropagation();
 
@@ -695,12 +692,9 @@
 
         // Load data for tab if needed
         if (tabName === 'orders') {
-            loadPendingOrders();
+            loadReadyOrders();
         }
     }
-
-    // Update the HTML onclick calls:
-
 
     // ==================== TABLE FUNCTIONS ====================
     async function loadTables() {
@@ -1163,7 +1157,7 @@
 
             await Promise.all(itemPromises);
 
-            // ✅ BETTER SUCCESS MESSAGE
+            // ✅ SUCCESS MESSAGE
             const orderNumber = order.orderId.substring(0, 8).toUpperCase();
             showSuccess(`✅ Order #${orderNumber} placed successfully! Sent to kitchen.`);
 
@@ -1178,7 +1172,7 @@
 
             // 4. Switch to orders tab
             switchTab('orders');
-            loadPendingOrders();
+            loadReadyOrders();
 
         } catch (error) {
             showError(`Error placing order: ${error.message}`);
@@ -1194,18 +1188,6 @@
 
     // ==================== ORDER STATUS FUNCTIONS ====================
     async function loadPendingOrders() {
-        await loadOrders('PENDING');
-    }
-
-    async function loadReadyOrders() {
-        await loadOrders('READY');
-    }
-
-    async function loadAllOrders() {
-        await loadOrders('ALL');
-    }
-
-    async function loadOrders(statusFilter) {
         const loading = document.getElementById('loadingOrders');
         const container = document.getElementById('ordersList');
 
@@ -1213,21 +1195,106 @@
         container.style.display = 'none';
 
         try {
-            let url = 'http://localhost:8084/api/orders';
-            if (statusFilter === 'PENDING') {
-                url = 'http://localhost:8084/api/orders/pending';
-            }
-
-            const response = await fetch(url);
+            // Get ALL orders and filter for PENDING status
+            const response = await fetch('http://localhost:8084/api/orders');
             if (response.ok) {
                 const orders = await response.json();
-                displayOrders(orders, statusFilter);
-            } else {
-                loading.innerHTML = 'Error loading orders';
+                // Filter for PENDING orders only
+                const pendingOrders = orders.filter(order => order.status === 'PENDING');
+                displayOrders(pendingOrders, 'PENDING');
             }
         } catch (error) {
-            loading.innerHTML = 'Error connecting to Order Service';
+            loading.innerHTML = 'Error loading pending orders';
+            console.error('Error:', error);
         }
+    }
+
+    async function loadReadyOrders() {
+        const loading = document.getElementById('loadingOrders');
+        const container = document.getElementById('ordersList');
+
+        loading.style.display = 'block';
+        container.style.display = 'none';
+
+        try {
+            const response = await fetch('http://localhost:8084/api/orders/waiter');
+            if (response.ok) {
+                const orders = await response.json();
+                displayReadyOrders(orders);
+            }
+        } catch (error) {
+            loading.innerHTML = 'Error loading ready orders';
+        }
+    }
+
+    async function loadAllOrders() {
+        const loading = document.getElementById('loadingOrders');
+        const container = document.getElementById('ordersList');
+
+        loading.style.display = 'block';
+        container.style.display = 'none';
+
+        try {
+            const response = await fetch('http://localhost:8084/api/orders');
+            if (response.ok) {
+                const orders = await response.json();
+                displayOrders(orders, 'ALL');
+            }
+        } catch (error) {
+            loading.innerHTML = 'Error loading all orders';
+        }
+    }
+
+    function displayReadyOrders(orders) {
+        const container = document.getElementById('ordersList');
+        const loading = document.getElementById('loadingOrders');
+
+        loading.style.display = 'none';
+
+        if (!orders || orders.length === 0) {
+            container.innerHTML = `
+                <div style="text-align: center; padding: 40px; color: #666;">
+                    No ready orders found.
+                    <p style="margin-top: 10px; font-size: 14px;">
+                        Ready orders will appear here after the chef prepares them.
+                    </p>
+                </div>
+            `;
+        } else {
+            let html = '';
+
+            orders.forEach(order => {
+                const time = new Date(order.createdAt).toLocaleTimeString();
+                const isReady = order.status === 'READY';
+                const isBilled = order.status === 'BILLED';
+
+                html += `
+                    <div class="order-card">
+                        <div class="order-header">
+                            <div class="order-table">Order #${order.orderId.substring(0, 8)}</div>
+                            <div class="order-status status-${order.status.toLowerCase()}">
+                                ${order.status}
+                            </div>
+                        </div>
+                        <p><strong>Table:</strong> ${order.tableId}</p>
+                        <p><strong>Total:</strong> Rs. ${order.totalAmount?.toFixed(2) || '0.00'}</p>
+                        <p><strong>Created:</strong> ${time}</p>
+                        ${isBilled ? `<p><strong>Note:</strong> Already billed by cashier</p>` : ''}
+
+                        ${isReady || isBilled ? `
+                            <div style="margin-top: 15px; text-align: right;">
+                                <button class="btn btn-success" onclick="markOrderServed('${order.orderId}')">
+                                    ✅ Mark as Served
+                                </button>
+                            </div>
+                        ` : ''}
+                    </div>
+                `;
+            });
+            container.innerHTML = html;
+        }
+
+        container.style.display = 'block';
     }
 
     function displayOrders(orders, filter) {
@@ -1257,14 +1324,6 @@
                         <p><strong>Table:</strong> ${order.tableId}</p>
                         <p><strong>Total:</strong> Rs. ${order.totalAmount?.toFixed(2) || '0.00'}</p>
                         <p><strong>Created:</strong> ${time}</p>
-
-                        ${order.status === 'READY' ? `
-                            <div style="margin-top: 15px; text-align: right;">
-                                <button class="btn btn-success" onclick="markOrderServed('${order.orderId}')">
-                                    ✅ Mark as Served
-                                </button>
-                            </div>
-                        ` : ''}
                     </div>
                 `;
             });
@@ -1281,10 +1340,22 @@
             });
 
             if (response.ok) {
-                showSuccess('Order marked as served');
+                showSuccess('✅ Order marked as SERVED!');
+
+                // Check if order was already BILLED
+                const allOrders = await fetch('http://localhost:8084/api/orders').then(r => r.json());
+                const order = allOrders.find(o => o.orderId === orderId);
+
+                if (order && order.status === 'BILLED') {
+                    // If already billed, mark as COMPLETED
+                    await fetch(`http://localhost:8084/api/orders/${orderId}/complete`, {
+                        method: 'PUT'
+                    });
+                    showSuccess('✅ Order completed (served and billed)!');
+                }
+
+                // Reload ready orders
                 loadReadyOrders();
-            } else {
-                showError('Failed to update order status');
             }
         } catch (error) {
             showError('Error: ' + error.message);
@@ -1299,7 +1370,7 @@
         loading.style.display = 'block';
         loading.innerHTML = '<div class="loading-spinner"></div>Loading orders...';
 
-        loadPendingOrders();
+        loadReadyOrders();
     }
 
     // ==================== UTILITY FUNCTIONS ====================
@@ -1339,7 +1410,6 @@
                 method: 'PUT'
             });
             showSuccess('Table marked as available');
-
 
             await Promise.all([
                 loadTables(),

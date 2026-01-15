@@ -984,16 +984,15 @@
 
     async function markOrderReady(orderId) {
         try {
-            console.log('Marking order ready:', orderId); // Debug
             const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/READY`, {
                 method: 'PUT'
             });
 
             if (response.ok) {
-                showSuccess('✅ Order marked as READY! Waiters will pick it up.');
-                // Reload orders and auto-switch to READY tab
+                showSuccess('✅ Order marked as READY! Waiters/Cashiers will pick it up.');
                 await loadOrders();
-                // Find and click the READY tab
+
+                // Auto-switch to READY tab
                 const readyTab = document.querySelector('[onclick="filterOrders(\'READY\')"]');
                 if (readyTab) {
                     readyTab.click();

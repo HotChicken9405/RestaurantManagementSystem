@@ -442,15 +442,13 @@
     // ==================== ORDER FUNCTIONS ====================
     async function loadReadyOrders() {
         try {
-            const response = await fetch('http://localhost:8084/api/orders');
+            const response = await fetch('http://localhost:8084/api/orders/cashier');
             if (response.ok) {
                 const orders = await response.json();
-                const readyOrders = orders.filter(order => order.status === 'READY');
-                displayReadyOrders(readyOrders);
+                displayReadyOrders(orders);
             }
         } catch (error) {
             console.error('Error loading orders:', error);
-            document.getElementById('loadingOrders').innerHTML = 'Error loading orders';
         }
     }
 
@@ -565,8 +563,6 @@
                 paymentStatus: 'PAID'
             };
 
-            console.log('Creating bill:', billData);
-
             // Send to billing service
             const response = await fetch('http://localhost:8085/api/bills', {
                 method: 'POST',
@@ -578,17 +574,26 @@
                 const bill = await response.json();
                 showSuccess(`Bill #${bill.billId.substring(0, 8)} generated successfully!`);
 
-                // Update order status to SERVED
-                await fetch(`http://localhost:8084/api/orders/${selectedOrder.orderId}/status/SERVED`, {
-                    method: 'PUT'
-                });
+                // Update order status based on current state
+                if (selectedOrder.status === 'SERVED') {
+                    // If already served, mark as COMPLETED
+                    await fetch(`http://localhost:8084/api/orders/${selectedOrder.orderId}/complete`, {
+                        method: 'PUT'
+                    });
+                    showSuccess('Order completed (served and billed)!');
+                } else {
+                    // If not served yet, mark as BILLED
+                    await fetch(`http://localhost:8084/api/orders/${selectedOrder.orderId}/status/BILLED`, {
+                        method: 'PUT'
+                    });
+                }
 
                 // Reset form and reload
                 cancelBill();
                 loadReadyOrders();
                 loadBillingHistory();
 
-                // Print receipt (simulated)
+                // Print receipt
                 printReceipt(bill);
             } else {
                 const errorText = await response.text();

@@ -9,27 +9,43 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/orders")
-@CrossOrigin(origins = "http://localhost:8081")  // ← ADD THIS!
+@CrossOrigin(origins = "http://localhost:8081")
 public class OrderController {
 
     @Autowired
     private OrderService orderService;
 
+    // Get all orders
     @GetMapping
     public List<Order> getAllOrders() {
         return orderService.getAllOrders();
     }
 
-    @GetMapping("/pending")
-    public List<Order> getPendingOrders() {
-        return orderService.getPendingOrders();
+    // Get orders by status
+    @GetMapping("/status/{status}")
+    public List<Order> getOrdersByStatus(@PathVariable String status) {
+        return orderService.getOrdersByStatus(Order.OrderStatus.valueOf(status));
     }
 
+    // Get orders for waiter (READY, BILLED)
+    @GetMapping("/waiter")
+    public List<Order> getOrdersForWaiter() {
+        return orderService.getOrdersForWaiter();
+    }
+
+    // Get orders for cashier (READY, SERVED)
+    @GetMapping("/cashier")
+    public List<Order> getOrdersForCashier() {
+        return orderService.getOrdersForCashier();
+    }
+
+    // Create order
     @PostMapping
     public Order createOrder(@RequestBody Order order) {
         return orderService.createOrder(order);
     }
 
+    // Update order status
     @PutMapping("/{orderId}/status/{status}")
     public Order updateOrderStatus(
             @PathVariable String orderId,
@@ -37,6 +53,13 @@ public class OrderController {
         return orderService.updateOrderStatus(orderId, status);
     }
 
+    // Complete order (mark as COMPLETED)
+    @PutMapping("/{orderId}/complete")
+    public Order completeOrder(@PathVariable String orderId) {
+        return orderService.completeOrder(orderId);
+    }
+
+    // Create order item
     @PostMapping("/items")
     public OrderItem createOrderItem(@RequestBody OrderItem orderItem) {
         return orderService.createOrderItem(orderItem);
