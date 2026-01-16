@@ -6,25 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="8b15539a-0619-4b23-b178-86e8c11fde87" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/controller/MenuController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/entity/MenuIngredient.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/repository/IngredientRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/repository/MenuIngredientRepository.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/service/MenuService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/controller/MenuController$StockUpdateRequest.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/controller/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/controller/MenuController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/entity/MenuIngredient.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/repository/IngredientRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/repository/MenuIngredientRepository.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/service/MenuService.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/service/MenuService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/service/OrderService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/controller/OrderController.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/service/OrderService.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/manager-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/manager-system.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/waiter-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/waiter-system.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/manager-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/manager-system.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/waiter-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/waiter-system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/java/com/restaurant/user/controller/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/java/com/restaurant/user/controller/ViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/com/restaurant/user/controller/ViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/com/restaurant/user/controller/ViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -47,12 +32,12 @@
     &quot;assignee&quot;: &quot;HotChicken9405&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/HotChicken9405/RestaurantManagementSystem.git",
-    "accountId": "1e86e072-5740-4ad7-9ab9-98909a10b4a3"
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/HotChicken9405/RestaurantManagementSystem.git&quot;,
+    &quot;accountId&quot;: &quot;1e86e072-5740-4ad7-9ab9-98909a10b4a3&quot;
   }
-}]]></component>
+}</component>
   <component name="HttpClientOnboardingState">{
   &quot;isOnboardingCommentShown&quot;: true
 }</component>
@@ -87,10 +72,10 @@
     "Spring Boot.OrderServiceApplication.executor": "Run",
     "Spring Boot.TableServiceApplication.executor": "Run",
     "Spring Boot.UserServiceApplication.executor": "Run",
-    "git-widget-placeholder": "Ravisha",
+    "git-widget-placeholder": "Dev-temp",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/HP/Desktop/SE2 test/RestaurantManagementSystem",
+    "last_opened_file_path": "C:/Users/HP/Desktop/git test 2/RestaurantManagementSystem",
     "nodejs_package_manager_path": "npm",
     "run.configurations.included.in.services": "true",
     "vue.rearranger.settings.migration": "true"
@@ -236,10 +221,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.TableServiceApplication" />
         <item itemvalue="Application.UserServiceApplication" />
-        <item itemvalue="Application.OrderServiceApplication" />
         <item itemvalue="Application.MenuServiceApplication" />
+        <item itemvalue="Application.OrderServiceApplication" />
+        <item itemvalue="Application.TableServiceApplication" />
         <item itemvalue="Application.BillingServiceApplication" />
       </list>
     </recent_temporary>
@@ -264,6 +249,7 @@
       <workItem from="1768466072838" duration="7058000" />
       <workItem from="1768485867514" duration="9619000" />
       <workItem from="1768526561028" duration="6864000" />
+      <workItem from="1768534717152" duration="286000" />
     </task>
     <servers />
   </component>

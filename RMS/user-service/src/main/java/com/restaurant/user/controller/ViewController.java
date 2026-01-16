@@ -6,14 +6,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class ViewController {
 
-    // Login page
+    // Home page (landing page)
     @GetMapping("/")
-    public String loginPage() {
-        return "login";
+    public String homePage() {
+        return "home";
     }
 
+    // Login page
     @GetMapping("/login")
-    public String loginPage2() {
+    public String loginPage() {
         return "login";
     }
 
@@ -38,4 +39,3 @@ public class ViewController {
         return "manager-system";
     }
 }
-

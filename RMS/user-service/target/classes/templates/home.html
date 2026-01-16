@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Management System</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header */
+        .header {
+            padding: 20px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .login-btn {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 12px 25px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s;
+        }
+
+        .login-btn:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+        }
+
+        /* Main Content */
+        .container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .hero-section {
+            text-align: center;
+            max-width: 800px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        /* Features Grid */
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+
+        .feature-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 15px;
+        }
+
+        .feature-desc {
+            color: rgba(255, 255, 255, 0.8);
+            line-height: 1.5;
+        }
+
+        /* Demo Credentials */
+        .demo-box {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 25px;
+            border-radius: 15px;
+            margin-top: 50px;
+            text-align: left;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .demo-title {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .demo-list {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        .demo-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 15px;
+            border-radius: 10px;
+        }
+
+        .demo-role {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+            margin-left: 10px;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 14px;
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-title {
+                font-size: 36px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .features-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .demo-list {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+<!-- Header -->
+<div class="header">
+    <div class="logo">
+        🍽️ Restaurant Management System
+    </div>
+    <button class="login-btn" onclick="goToLogin()">
+        🔐 Login to System
+    </button>
+</div>
+
+<!-- Main Content -->
+<div class="container">
+    <div class="hero-section">
+        <h1 class="hero-title">Modern Restaurant Management Solution</h1>
+        <p class="hero-subtitle">
+            A comprehensive microservices-based system designed to streamline restaurant operations.
+            Manage orders, inventory, billing, and staff with real-time updates across all departments.
+            Perfect for small to medium-sized restaurants looking to digitize their operations.
+        </p>
+
+        <!-- Features Grid -->
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">👨‍🍳</div>
+                <div class="feature-title">Chef System</div>
+                <p class="feature-desc">Real-time kitchen display, order tracking, and preparation management</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">👨‍💼</div>
+                <div class="feature-title">Waiter System</div>
+                <p class="feature-desc">Table management, order taking, and customer service interface</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💰</div>
+                <div class="feature-title">Cashier System</div>
+                <p class="feature-desc">Billing, payment processing, and daily sales reporting</p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📊</div>
+                <div class="feature-title">Manager System</div>
+                <p class="feature-desc">Complete oversight, staff management, and business analytics</p>
+            </div>
+        </div>
+
+        <!-- Demo Credentials -->
+        <div class="demo-box">
+            <div class="demo-title">
+                🚀 Demo Credentials (All passwords: 1234)
+            </div>
+            <ul class="demo-list">
+                <li class="demo-item">
+                    <strong>Username:</strong> chef
+                    <span class="demo-role">CHEF</span>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px;">Kitchen order management</div>
+                </li>
+                <li class="demo-item">
+                    <strong>Username:</strong> waiter1
+                    <span class="demo-role">WAITER</span>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px;">Table & order management</div>
+                </li>
+                <li class="demo-item">
+                    <strong>Username:</strong> cashier
+                    <span class="demo-role">CASHIER</span>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px;">Billing & payments</div>
+                </li>
+                <li class="demo-item">
+                    <strong>Username:</strong> manager
+                    <span class="demo-role">MANAGER</span>
+                    <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px;">Full system control</div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!-- Footer -->
+<div class="footer">
+    <p>Restaurant Management System © 2024 | Built with Spring Boot Microservices</p>
+    <p style="margin-top: 10px; font-size: 12px;">
+        Services running on: User Service (8081), Table Service (8082), Menu Service (8083), Order Service (8084), Billing Service (8085)
+    </p>
+</div>
+
+<script>
+    function goToLogin() {
+        window.location.href = '/login';
+    }
+
+    // Auto-check if already logged in
+    document.addEventListener('DOMContentLoaded', function() {
+        const userData = localStorage.getItem('restaurantUser');
+        if (userData) {
+            const user = JSON.parse(userData);
+            // Show logged in message
+            const loginBtn = document.querySelector('.login-btn');
+            loginBtn.innerHTML = `👋 Hi ${user.fullName} | Logout`;
+            loginBtn.onclick = function() {
+                localStorage.removeItem('restaurantUser');
+                window.location.href = '/login';
+            };
+
+            // Add a welcome message
+            const header = document.querySelector('.header');
+            const welcomeMsg = document.createElement('div');
+            welcomeMsg.style.cssText = 'background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 20px; font-size: 14px;';
+            welcomeMsg.innerHTML = `Logged in as <strong>${user.role}</strong>`;
+            header.insertBefore(welcomeMsg, loginBtn);
+        }
+    });
+</script>
+</body>
+</html>
