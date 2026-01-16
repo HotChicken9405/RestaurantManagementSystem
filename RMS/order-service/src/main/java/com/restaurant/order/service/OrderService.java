@@ -80,7 +80,5 @@ public class OrderService {
     }
 
 
-    public List<OrderItem> getOrderItemsByOrderId(String orderId) {
-        return orderItemRepository.findByOrder_OrderId(orderId);
-    }
+
 }

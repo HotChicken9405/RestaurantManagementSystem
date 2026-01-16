@@ -5,18 +5,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b15539a-0619-4b23-b178-86e8c11fde87" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/entity/MenuIngredient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/repository/IngredientRepository.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/repository/MenuIngredientRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/entity/MenuIngredient.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/repository/IngredientRepository.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/repository/MenuIngredientRepository.java" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/service/MenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/controller/MenuController$StockUpdateRequest.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/controller/MenuController.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/controller/MenuController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/entity/MenuIngredient.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/repository/IngredientRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/repository/MenuIngredientRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/service/MenuService.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/target/classes/com/restaurant/menu/service/MenuService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/controller/OrderController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/repository/OrderItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/repository/OrderItemRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/controller/OrderController.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/controller/OrderController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/service/OrderService.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/target/classes/com/restaurant/order/service/OrderService.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/manager-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/manager-system.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/waiter-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/waiter-system.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/manager-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/manager-system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/waiter-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/waiter-system.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -42,7 +50,7 @@
   <component name="GithubPullRequestsUISettings"><![CDATA[{
   "selectedUrlAndAccountId": {
     "url": "https://github.com/HotChicken9405/RestaurantManagementSystem.git",
-    "accountId": "6b9a8b89-322e-4fbc-9254-ce65c81e43ea"
+    "accountId": "1e86e072-5740-4ad7-9ab9-98909a10b4a3"
   }
 }]]></component>
   <component name="HttpClientOnboardingState">{
@@ -82,7 +90,7 @@
     "git-widget-placeholder": "Ravisha",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/User/OneDrive/Desktop/SE/RestaurantManagementSystem",
+    "last_opened_file_path": "C:/Users/HP/Desktop/SE2 test/RestaurantManagementSystem",
     "nodejs_package_manager_path": "npm",
     "run.configurations.included.in.services": "true",
     "vue.rearranger.settings.migration": "true"
@@ -101,6 +109,17 @@
     <option name="configurationStatuses">
       <map>
         <entry key="Application">
+          <value>
+            <map>
+              <entry key="BillingServiceApplication" value="STOPPED" />
+              <entry key="MenuServiceApplication" value="STOPPED" />
+              <entry key="OrderServiceApplication" value="STOPPED" />
+              <entry key="TableServiceApplication" value="STOPPED" />
+              <entry key="UserServiceApplication" value="STOPPED" />
+            </map>
+          </value>
+        </entry>
+        <entry key="SpringBootApplicationConfigurationType">
           <value>
             <map>
               <entry key="BillingServiceApplication" value="STOPPED" />
@@ -180,9 +199,23 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="BillingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="billing-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.restaurant.billing.BillingServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="MenuServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="menu-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.restaurant.menu.MenuServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="OrderServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="order-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.restaurant.order.OrderServiceApplication" />
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
@@ -194,15 +227,30 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="UserServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
+      <module name="user-service" />
+      <option name="SPRING_BOOT_MAIN_CLASS" value="com.restaurant.user.UserServiceApplication" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.UserServiceApplication" />
         <item itemvalue="Application.TableServiceApplication" />
+        <item itemvalue="Application.UserServiceApplication" />
         <item itemvalue="Application.OrderServiceApplication" />
         <item itemvalue="Application.MenuServiceApplication" />
         <item itemvalue="Application.BillingServiceApplication" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
+        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -215,6 +263,7 @@
       <workItem from="1768466023375" duration="35000" />
       <workItem from="1768466072838" duration="7058000" />
       <workItem from="1768485867514" duration="9619000" />
+      <workItem from="1768526561028" duration="6864000" />
     </task>
     <servers />
   </component>

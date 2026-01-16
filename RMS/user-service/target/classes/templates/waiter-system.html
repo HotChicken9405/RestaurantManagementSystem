@@ -1334,106 +1334,36 @@
     }
 
     async function markOrderServed(orderId) {
-    try {
-        // 1. Mark order as served
-        const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/SERVED`, {
-            method: 'PUT'
-        });
+        try {
+            const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/SERVED`, {
+                method: 'PUT'
+            });
 
-        if (response.ok) {
-            showSuccess('✅ Order marked as SERVED!');
+            if (response.ok) {
+                showSuccess('✅ Order marked as SERVED!');
 
-            // 2. Reduce inventory for this order
-            await reduceInventoryForOrder(orderId);
+                // Check if order was already BILLED
+                const allOrders = await fetch('http://localhost:8084/api/orders').then(r => r.json());
+                const order = allOrders.find(o => o.orderId === orderId);
 
-            // 3. Check if order was already BILLED
-            const allOrders = await fetch('http://localhost:8084/api/orders').then(r => r.json());
-            const order = allOrders.find(o => o.orderId === orderId);
-
-            if (order && order.status === 'BILLED') {
-                // If already billed, mark as COMPLETED
-                await fetch(`http://localhost:8084/api/orders/${orderId}/complete`, {
-                    method: 'PUT'
-                });
-                showSuccess('✅ Order completed (served and billed)!');
-            }
-
-            // 4. Reload ready orders
-            loadReadyOrders();
-        }
-    } catch (error) {
-        showError('Error: ' + error.message);
-    }
-}
-
-    async function reduceInventoryForOrder(orderId) {
-    try {
-        console.log('🧾 Reducing inventory for order:', orderId);
-
-        // 1. Get order items
-        const itemsResponse = await fetch(`http://localhost:8084/api/orders/${orderId}/items`);
-        if (!itemsResponse.ok) {
-            console.error('Failed to fetch order items');
-            return;
-        }
-
-        const orderItems = await itemsResponse.json();
-        console.log('Order items:', orderItems.length);
-
-        // 2. For each order item, reduce ingredients
-        for (const orderItem of orderItems) {
-            console.log('Processing item:', orderItem.itemName, 'Qty:', orderItem.quantity);
-
-            // Get ingredients for this menu item
-            const ingredientsResponse = await fetch(`http://localhost:8083/api/menu/${orderItem.itemId}/ingredients`);
-            if (!ingredientsResponse.ok) {
-                console.error('Failed to get ingredients for item:', orderItem.itemId);
-                continue;
-            }
-
-            const menuIngredients = await ingredientsResponse.json();
-            console.log('Found ingredients:', menuIngredients.length);
-
-            // Reduce each ingredient
-            for (const menuIngredient of menuIngredients) {
-                if (menuIngredient.ingredient && menuIngredient.quantityRequired) {
-                    const quantityToReduce = menuIngredient.quantityRequired * orderItem.quantity;
-
-                    console.log(`Reducing ${quantityToReduce} of ${menuIngredient.ingredient.ingredientName}`);
-
-                    // Update ingredient stock (reduce quantity)
-                    await updateIngredientStock(
-                        menuIngredient.ingredient.ingredientId,
-                        -quantityToReduce // Negative to reduce
-                    );
+                if (order && order.status === 'BILLED') {
+                    // If already billed, mark as COMPLETED
+                    await fetch(`http://localhost:8084/api/orders/${orderId}/complete`, {
+                        method: 'PUT'
+                    });
+                    showSuccess('✅ Order completed (served and billed)!');
                 }
+
+                // Reload ready orders
+                loadReadyOrders();
             }
+        } catch (error) {
+            showError('Error: ' + error.message);
         }
-
-        console.log('✅ Inventory reduced successfully for order:', orderId);
-
-    } catch (error) {
-        console.error('❌ Error reducing inventory:', error);
-        // Don't fail the order if inventory fails
     }
-}
 
-// 2. NEW: Update ingredient stock function
-async function updateIngredientStock(ingredientId, quantityChange) {
-    try {
-        const response = await fetch(`http://localhost:8083/api/menu/ingredients/${ingredientId}/stock`, {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ quantityChange: quantityChange })
-        });
 
-        if (!response.ok) {
-            console.error('Failed to update ingredient:', ingredientId);
-        }
-    } catch (error) {
-        console.error('Error updating ingredient stock:', error);
-    }
-}
+
 
     function refreshOrders() {
         const container = document.getElementById('ordersList');

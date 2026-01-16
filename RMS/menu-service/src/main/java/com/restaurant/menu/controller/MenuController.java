@@ -1,54 +1,39 @@
 package com.restaurant.menu.controller;
 
-import com.restaurant.menu.entity.Ingredient;
-import com.restaurant.menu.entity.MenuIngredient;
+import com.restaurant.menu.entity.MenuItem;
 import com.restaurant.menu.service.MenuService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
-@RequestMapping("/api/menu")
 @CrossOrigin(origins = "http://localhost:8081")
+@RequestMapping("/api/menu")
 public class MenuController {
 
     @Autowired
     private MenuService menuService;
 
-    // ... existing endpoints ...
-
-    // Get ingredients for a menu item
-    @GetMapping("/{itemId}/ingredients")
-    public List<MenuIngredient> getMenuItemIngredients(@PathVariable String itemId) {
-        return menuService.getIngredientsForMenuItem(itemId);
+    @GetMapping
+    public List<MenuItem> getAllMenuItems() {
+        return menuService.getAllMenuItems();
     }
 
-    // Update ingredient stock
-    @PutMapping("/ingredients/{ingredientId}/stock")
-    public Ingredient updateIngredientStock(
-            @PathVariable String ingredientId,
-            @RequestBody StockUpdateRequest request) {
-        return menuService.updateIngredientStock(ingredientId, request.getQuantityChange());
+    @GetMapping("/available")
+    public List<MenuItem> getAvailableMenuItems() {
+        return menuService.getAvailableMenuItems();
     }
 
-    // Get all ingredients
-    @GetMapping("/ingredients")
-    public List<Ingredient> getAllIngredients() {
-        return menuService.getAllIngredients();
+    @PostMapping
+    public MenuItem createMenuItem(@RequestBody MenuItem menuItem) {
+        return menuService.createMenuItem(menuItem);
     }
 
-    // Get ingredient by ID
-    @GetMapping("/ingredients/{ingredientId}")
-    public Ingredient getIngredientById(@PathVariable String ingredientId) {
-        return menuService.getIngredientById(ingredientId)
-                .orElseThrow(() -> new RuntimeException("Ingredient not found"));
-    }
-
-    // DTO for stock update
-    public static class StockUpdateRequest {
-        private Double quantityChange;
-
-        public Double getQuantityChange() { return quantityChange; }
-        public void setQuantityChange(Double quantityChange) { this.quantityChange = quantityChange; }
+    @PutMapping("/{itemId}")
+    public MenuItem updateMenuItem(
+            @PathVariable String itemId,
+            @RequestBody MenuItem menuItem) {
+        return menuService.updateMenuItem(itemId, menuItem);
     }
 }

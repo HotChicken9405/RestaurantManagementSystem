@@ -66,8 +66,5 @@ public class OrderController {
     }
 
 
-    @GetMapping("/{orderId}/items")
-    public List<OrderItem> getOrderItems(@PathVariable String orderId) {
-        return orderService.getOrderItemsByOrderId(orderId);
-    }
+    
 }
