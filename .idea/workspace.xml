@@ -6,9 +6,9 @@
   <component name="ChangeListManager">
     <list default="true" id="8b15539a-0619-4b23-b178-86e8c11fde87" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/java/com/restaurant/user/controller/ViewController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/java/com/restaurant/user/controller/ViewController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/com/restaurant/user/controller/ViewController.class" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/com/restaurant/user/controller/ViewController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/home.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/login.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -32,12 +32,12 @@
     &quot;assignee&quot;: &quot;HotChicken9405&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/HotChicken9405/RestaurantManagementSystem.git&quot;,
-    &quot;accountId&quot;: &quot;1e86e072-5740-4ad7-9ab9-98909a10b4a3&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/HotChicken9405/RestaurantManagementSystem.git",
+    "accountId": "6b9a8b89-322e-4fbc-9254-ce65c81e43ea"
   }
-}</component>
+}]]></component>
   <component name="HttpClientOnboardingState">{
   &quot;isOnboardingCommentShown&quot;: true
 }</component>
@@ -75,7 +75,7 @@
     "git-widget-placeholder": "Dev-temp",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/HP/Desktop/git test 2/RestaurantManagementSystem",
+    "last_opened_file_path": "C:/Users/User/OneDrive/Desktop/SEEEEEE/RestaurantManagementSystem",
     "nodejs_package_manager_path": "npm",
     "run.configurations.included.in.services": "true",
     "vue.rearranger.settings.migration": "true"
@@ -94,17 +94,6 @@
     <option name="configurationStatuses">
       <map>
         <entry key="Application">
-          <value>
-            <map>
-              <entry key="BillingServiceApplication" value="STOPPED" />
-              <entry key="MenuServiceApplication" value="STOPPED" />
-              <entry key="OrderServiceApplication" value="STOPPED" />
-              <entry key="TableServiceApplication" value="STOPPED" />
-              <entry key="UserServiceApplication" value="STOPPED" />
-            </map>
-          </value>
-        </entry>
-        <entry key="SpringBootApplicationConfigurationType">
           <value>
             <map>
               <entry key="BillingServiceApplication" value="STOPPED" />
@@ -222,20 +211,12 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.UserServiceApplication" />
-        <item itemvalue="Application.MenuServiceApplication" />
-        <item itemvalue="Application.OrderServiceApplication" />
         <item itemvalue="Application.TableServiceApplication" />
         <item itemvalue="Application.BillingServiceApplication" />
+        <item itemvalue="Application.OrderServiceApplication" />
+        <item itemvalue="Application.MenuServiceApplication" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">

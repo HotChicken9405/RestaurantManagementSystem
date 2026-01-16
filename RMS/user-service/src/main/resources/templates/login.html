@@ -9,190 +9,543 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --coral-primary: #FF6B6B;
+            --coral-secondary: #FF8E6B;
+            --coral-accent: #FFB86B;
+            --coral-light: #FFE8E6;
+            --coral-dark: #D45D5D;
+            --coral-gradient: linear-gradient(135deg, #FF6B6B 0%, #FF8E6B 100%);
+            --coral-gradient-hover: linear-gradient(135deg, #FF8E6B 0%, #FF6B6B 100%);
+            --text-dark: #333333;
+            --text-light: #666666;
+            --shadow: 0 15px 35px rgba(255, 107, 107, 0.15);
+            --shadow-hover: 0 20px 40px rgba(255, 107, 107, 0.25);
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFE8E6 0%, #FFF0E6 50%, #FFE6E0 100%);
             height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
+            overflow: hidden;
         }
 
-        .login-container {
+        /* Animated Background Elements */
+        .bg-element {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.3;
+            z-index: -1;
+        }
+
+        .bg-1 {
+            width: 300px;
+            height: 300px;
+            background: var(--coral-primary);
+            top: -150px;
+            right: -150px;
+        }
+
+        .bg-2 {
+            width: 200px;
+            height: 200px;
+            background: var(--coral-accent);
+            bottom: -100px;
+            left: -100px;
+        }
+
+        .bg-3 {
+            width: 150px;
+            height: 150px;
+            background: var(--coral-secondary);
+            top: 50%;
+            right: 20%;
+        }
+
+        /* Back Button */
+        .back-btn {
+            position: absolute;
+            top: 25px;
+            left: 25px;
             background: white;
-            padding: 40px;
-            border-radius: 15px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-            width: 100%;
-            max-width: 400px;
-            text-align: center;
+            color: var(--coral-primary);
+            border: 2px solid var(--coral-light);
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.1);
         }
 
+        .back-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+            border-color: var(--coral-primary);
+            background: var(--coral-light);
+        }
+
+        /* Login Container */
+        .login-container {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 420px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            animation: fadeIn 0.8s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .login-container::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--coral-gradient);
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Logo */
         .logo {
-            font-size: 2.5rem;
-            color: #667eea;
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            color: var(--coral-primary);
+            margin-bottom: 15px;
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
         }
 
         h1 {
-            color: #333;
-            margin-bottom: 30px;
-            font-weight: 600;
+            color: var(--text-dark);
+            margin-bottom: 10px;
+            font-weight: 700;
+            font-size: 28px;
         }
 
+        .subtitle {
+            color: var(--text-light);
+            margin-bottom: 35px;
+            font-size: 15px;
+            font-weight: 400;
+        }
+
+        /* Input Groups */
         .input-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
             text-align: left;
         }
 
         label {
             display: block;
-            margin-bottom: 8px;
-            color: #555;
-            font-weight: 500;
+            margin-bottom: 10px;
+            color: var(--text-dark);
+            font-weight: 600;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        label i {
+            color: var(--coral-primary);
+            font-size: 16px;
+        }
+
+        .input-wrapper {
+            position: relative;
         }
 
         input {
             width: 100%;
-            padding: 12px 15px;
-            border: 2px solid #ddd;
-            border-radius: 8px;
+            padding: 16px 20px 16px 50px;
+            border: 2px solid #FFE4E4;
+            border-radius: 12px;
             font-size: 16px;
-            transition: border 0.3s;
+            transition: all 0.3s ease;
+            background: white;
+            color: var(--text-dark);
         }
 
         input:focus {
             outline: none;
-            border-color: #667eea;
+            border-color: var(--coral-primary);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.1);
+            background: #FFF9F9;
         }
 
+        .input-icon {
+            position: absolute;
+            left: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--coral-primary);
+            font-size: 18px;
+        }
+
+        .toggle-password {
+            position: absolute;
+            right: 18px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            color: #CCCCCC;
+            cursor: pointer;
+            font-size: 18px;
+            transition: color 0.3s;
+        }
+
+        .toggle-password:hover {
+            color: var(--coral-primary);
+        }
+
+        /* Login Button */
         .login-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--coral-gradient);
             color: white;
             border: none;
-            padding: 14px;
+            padding: 16px;
             width: 100%;
-            border-radius: 8px;
+            border-radius: 12px;
             font-size: 16px;
-            font-weight: 600;
+            font-weight: 700;
             cursor: pointer;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
             margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
         }
 
         .login-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 7px 14px rgba(102, 126, 234, 0.4);
+            background: var(--coral-gradient-hover);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
         }
 
         .login-btn:active {
             transform: translateY(0);
         }
 
+        .login-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+
+        /* Error Message */
         .error-message {
-            color: #e74c3c;
-            background: #fde8e8;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 15px;
+            color: #FF4757;
+            background: rgba(255, 71, 87, 0.08);
+            padding: 16px;
+            border-radius: 12px;
+            margin-top: 20px;
             display: none;
             font-weight: 500;
-        }
-
-        .demo-credentials {
-            margin-top: 25px;
-            padding: 15px;
-            background: #f8f9fa;
-            border-radius: 8px;
             text-align: left;
+            border-left: 4px solid #FF4757;
+            animation: shake 0.5s ease;
         }
 
-        .demo-credentials h3 {
-            color: #555;
-            margin-bottom: 10px;
-            font-size: 14px;
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
-        .demo-credentials ul {
+        /* Demo Credentials */
+        .demo-credentials {
+            margin-top: 30px;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.05) 0%, rgba(255, 142, 107, 0.05) 100%);
+            border-radius: 15px;
+            text-align: left;
+            border: 1px solid rgba(255, 107, 107, 0.1);
+        }
+
+        .demo-title {
+            color: var(--text-dark);
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .demo-title i {
+            color: var(--coral-primary);
+        }
+
+        .demo-list {
             list-style: none;
-            font-size: 13px;
-            color: #666;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
 
-        .demo-credentials li {
-            margin-bottom: 5px;
-            padding-left: 15px;
-            position: relative;
+        @media (max-width: 450px) {
+            .demo-list {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .demo-credentials li:before {
-            content: "•";
-            color: #667eea;
-            position: absolute;
-            left: 0;
+        .demo-item {
+            background: rgba(255, 255, 255, 0.8);
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 13.5px;
+            color: var(--text-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: 1px solid #FFE4E4;
+        }
+
+        .demo-item:hover {
+            background: white;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.1);
+            border-color: var(--coral-primary);
+        }
+
+        .demo-item span {
+            font-weight: 700;
+            color: var(--text-dark);
         }
 
         .role-tag {
             display: inline-block;
-            background: #e0e7ff;
-            color: #667eea;
-            padding: 2px 8px;
-            border-radius: 12px;
+            padding: 4px 10px;
+            border-radius: 20px;
             font-size: 11px;
-            font-weight: 600;
-            margin-left: 5px;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+        }
+
+        .chef { background: #FFE8E6; color: var(--coral-primary); }
+        .waiter { background: #FFF0E6; color: var(--coral-secondary); }
+        .cashier { background: #FFF8E6; color: var(--coral-accent); }
+        .manager { background: #E6F0FF; color: #6B8BFF; }
+
+        /* Footer Note */
+        .footer-note {
+            margin-top: 25px;
+            color: #AAAAAA;
+            font-size: 12px;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .login-container {
+                padding: 40px 25px;
+                margin: 20px;
+            }
+
+            .back-btn {
+                top: 15px;
+                left: 15px;
+                padding: 8px 16px;
+                font-size: 14px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .logo {
+                font-size: 3rem;
+            }
+
+            input {
+                padding: 14px 20px 14px 50px;
+            }
         }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-<!-- Add this at the top of login.html body, right after the opening body tag -->
-<div style="position: absolute; top: 20px; left: 20px;">
-    <button onclick="window.location.href='/'"
-            style="background: #667eea; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-        ← Back to Home
-    </button>
-</div>
+<!-- Background Elements -->
+<div class="bg-element bg-1"></div>
+<div class="bg-element bg-2"></div>
+<div class="bg-element bg-3"></div>
+
+<!-- Back Button -->
+<button class="back-btn" onclick="window.location.href='/'">
+    <i class="fas fa-arrow-left"></i> Back to Home
+</button>
+
+<!-- Login Container -->
 <div class="login-container">
     <div class="logo">🍽️</div>
     <h1>Restaurant Management System</h1>
+    <p class="subtitle">Sign in to access your dashboard</p>
 
     <form id="loginForm">
         <div class="input-group">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Enter your username" required>
+            <label for="username"><i class="fas fa-user"></i> Username</label>
+            <div class="input-wrapper">
+                <input type="text" id="username" placeholder="Enter your username" required>
+                <div class="input-icon">
+                    <i class="fas fa-user-circle"></i>
+                </div>
+            </div>
         </div>
 
         <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter your password" required>
+            <label for="password"><i class="fas fa-lock"></i> Password</label>
+            <div class="input-wrapper">
+                <input type="password" id="password" placeholder="Enter your password" required>
+                <div class="input-icon">
+                    <i class="fas fa-key"></i>
+                </div>
+                <button type="button" class="toggle-password" id="togglePassword">
+                    <i class="fas fa-eye"></i>
+                </button>
+            </div>
         </div>
 
-        <button type="submit" class="login-btn">Login</button>
+        <button type="submit" class="login-btn">
+            <i class="fas fa-sign-in-alt"></i> Sign In
+        </button>
     </form>
 
     <div id="errorMessage" class="error-message"></div>
 
     <div class="demo-credentials">
-        <h3>Demo Credentials (All passwords: 1234)</h3>
-        <ul>
-            <li>chef <span class="role-tag">CHEF</span></li>
-            <li>waiter1 <span class="role-tag">WAITER</span></li>
-            <li>waiter2 <span class="role-tag">WAITER</span></li>
-            <li>cashier <span class="role-tag">CASHIER</span></li>
-            <li>manager <span class="role-tag">MANAGER</span></li>
+        <div class="demo-title">
+            <i class="fas fa-key"></i> Demo Credentials (All passwords: 1234)
+        </div>
+        <ul class="demo-list">
+            <li class="demo-item" onclick="fillCredentials('chef')">
+                <span>chef</span>
+                <span class="role-tag chef">CHEF</span>
+            </li>
+            <li class="demo-item" onclick="fillCredentials('waiter1')">
+                <span>waiter1</span>
+                <span class="role-tag waiter">WAITER</span>
+            </li>
+            <li class="demo-item" onclick="fillCredentials('waiter2')">
+                <span>waiter2</span>
+                <span class="role-tag waiter">WAITER</span>
+            </li>
+            <li class="demo-item" onclick="fillCredentials('cashier')">
+                <span>cashier</span>
+                <span class="role-tag cashier">CASHIER</span>
+            </li>
+            <li class="demo-item" onclick="fillCredentials('manager')">
+                <span>manager</span>
+                <span class="role-tag manager">MANAGER</span>
+            </li>
         </ul>
+    </div>
+
+    <div class="footer-note">
+        <i class="fas fa-info-circle"></i> All demo accounts have full functionality
     </div>
 </div>
 
 <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Check if already logged in
+        const userData = localStorage.getItem('restaurantUser');
+        if (userData) {
+            const user = JSON.parse(userData);
+            console.log('Already logged in as:', user.username);
+
+            // Auto-redirect based on role
+            switch(user.role) {
+                case 'WAITER':
+                    window.location.href = '/waiter-system';
+                    break;
+                case 'CHEF':
+                    window.location.href = '/chef-system';
+                    break;
+                case 'CASHIER':
+                    window.location.href = '/cashier-system';
+                    break;
+                case 'MANAGER':
+                    window.location.href = '/manager-system';
+                    break;
+            }
+        }
+
+        // Auto-fill for testing
+        const usernameInput = document.getElementById('username');
+        if (!usernameInput.value) {
+            usernameInput.value = 'chef';
+            document.getElementById('password').value = '1234';
+        }
+    });
+
+    // Toggle password visibility
+    document.getElementById('togglePassword').addEventListener('click', function() {
+        const passwordInput = document.getElementById('password');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.innerHTML = type === 'password' ? '<i class="fas fa-eye"></i>' : '<i class="fas fa-eye-slash"></i>';
+    });
+
+    // Fill demo credentials
+    function fillCredentials(username) {
+        const usernameInput = document.getElementById('username');
+        const passwordInput = document.getElementById('password');
+
+        usernameInput.value = username;
+        passwordInput.value = '1234';
+        usernameInput.focus();
+
+        // Add visual feedback
+        const demoItem = event.currentTarget;
+        demoItem.style.transform = 'scale(0.98)';
+        demoItem.style.background = 'white';
+        setTimeout(() => {
+            demoItem.style.transform = '';
+        }, 200);
+    }
+
+    // Login form submission
     document.getElementById('loginForm').addEventListener('submit', async function(event) {
         event.preventDefault();
 
         const username = document.getElementById('username').value.trim();
         const password = document.getElementById('password').value.trim();
         const errorElement = document.getElementById('errorMessage');
+        const loginBtn = document.querySelector('.login-btn');
 
         // Clear previous error
         errorElement.style.display = 'none';
@@ -206,12 +559,11 @@
 
         try {
             // Show loading state
-            const loginBtn = document.querySelector('.login-btn');
-            const originalText = loginBtn.textContent;
-            loginBtn.textContent = 'Logging in...';
+            const originalText = loginBtn.innerHTML;
+            loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
             loginBtn.disabled = true;
 
-            // Call login API
+            // Call login API (KEEPING ORIGINAL BACKEND PATH)
             const response = await fetch('http://localhost:8081/api/users/login', {
                 method: 'POST',
                 headers: {
@@ -226,7 +578,7 @@
             if (response.ok) {
                 const user = await response.json();
 
-                // ✅ CRITICAL FIX: SAVE USER TO LOCALSTORAGE
+                // Save user to localStorage
                 localStorage.setItem('restaurantUser', JSON.stringify(user));
                 console.log('✅ User saved to localStorage:', user.username, 'Role:', user.role);
 
@@ -257,8 +609,7 @@
             console.error('Login error:', error);
         } finally {
             // Reset button
-            const loginBtn = document.querySelector('.login-btn');
-            loginBtn.textContent = 'Login';
+            loginBtn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
             loginBtn.disabled = false;
         }
     });
@@ -275,31 +626,6 @@
         if (!this.value) {
             this.value = 'chef';
             document.getElementById('password').value = '1234';
-        }
-    });
-
-    // ✅ ADD: Check if already logged in
-    document.addEventListener('DOMContentLoaded', function() {
-        const userData = localStorage.getItem('restaurantUser');
-        if (userData) {
-            const user = JSON.parse(userData);
-            console.log('Already logged in as:', user.username);
-
-            // Auto-redirect based on role
-            switch(user.role) {
-                case 'WAITER':
-                    window.location.href = '/waiter-system';
-                    break;
-                case 'CHEF':
-                    window.location.href = '/chef-system';
-                    break;
-                case 'CASHIER':
-                    window.location.href = '/cashier-system';
-                    break;
-                case 'MANAGER':
-                    window.location.href = '/manager-system';
-                    break;
-            }
         }
     });
 </script>

@@ -4,29 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Restaurant Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --coral-primary: #FF6B6B;
+            --coral-secondary: #FF8E6B;
+            --coral-accent: #FFB86B;
+            --coral-light: #FFE8E6;
+            --coral-dark: #D45D5D;
+            --coral-gradient: linear-gradient(135deg, #FF6B6B 0%, #FF8E6B 100%);
+            --coral-gradient-hover: linear-gradient(135deg, #FF8E6B 0%, #FF6B6B 100%);
+            --text-dark: #333333;
+            --text-light: #666666;
+            --shadow: 0 15px 35px rgba(255, 107, 107, 0.15);
+            --shadow-hover: 0 20px 40px rgba(255, 107, 107, 0.25);
         }
 
         body {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FFE8E6 0%, #FFF0E6 50%, #FFE6E0 100%);
             min-height: 100vh;
-            color: white;
+            color: var(--text-dark);
             display: flex;
             flex-direction: column;
         }
 
         /* Header */
         .header {
-            padding: 20px 30px;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(0, 0, 0, 0.2);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
 
         .logo {
@@ -34,24 +54,48 @@
             font-weight: bold;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 15px;
+            color: var(--text-dark);
+        }
+
+        .logo-icon {
+            background: var(--coral-gradient);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .logo span {
+            background: var(--coral-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .login-btn {
-            background: rgba(255, 255, 255, 0.2);
+            background: var(--coral-gradient);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.3);
-            padding: 12px 25px;
+            border: none;
+            padding: 12px 30px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
             font-size: 16px;
             transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
         }
 
         .login-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-            transform: translateY(-2px);
+            background: var(--coral-gradient-hover);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
         }
 
         /* Main Content */
@@ -60,30 +104,34 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px;
+            padding: 60px 40px;
             max-width: 1200px;
             margin: 0 auto;
         }
 
         .hero-section {
             text-align: center;
-            max-width: 800px;
+            max-width: 900px;
         }
 
         .hero-title {
-            font-size: 48px;
+            font-size: 56px;
             font-weight: 800;
-            margin-bottom: 20px;
-            background: linear-gradient(135deg, #ffffff 0%, #e0e7ff 100%);
+            margin-bottom: 25px;
+            background: var(--coral-gradient);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            line-height: 1.1;
         }
 
         .hero-subtitle {
             font-size: 20px;
             line-height: 1.6;
-            margin-bottom: 40px;
-            color: rgba(255, 255, 255, 0.9);
+            margin-bottom: 50px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         /* Features Grid */
@@ -95,89 +143,178 @@
         }
 
         .feature-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            padding: 30px;
-            border-radius: 15px;
+            background: white;
+            padding: 35px 30px;
+            border-radius: 20px;
             text-align: center;
-            transition: transform 0.3s;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+            box-shadow: var(--shadow);
+            border: 1px solid #FFE4E4;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--coral-gradient);
         }
 
         .feature-card:hover {
             transform: translateY(-10px);
-            background: rgba(255, 255, 255, 0.15);
+            box-shadow: var(--shadow-hover);
         }
 
+        .feature-card:nth-child(1):hover .feature-icon { background: var(--coral-primary); }
+        .feature-card:nth-child(2):hover .feature-icon { background: var(--coral-secondary); }
+        .feature-card:nth-child(3):hover .feature-icon { background: var(--coral-accent); }
+        .feature-card:nth-child(4):hover .feature-icon { background: #6B8BFF; }
+
         .feature-icon {
-            font-size: 40px;
-            margin-bottom: 20px;
+            font-size: 48px;
+            margin-bottom: 25px;
+            background: var(--coral-light);
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: auto;
+            margin-right: auto;
+            transition: all 0.3s ease;
         }
 
         .feature-title {
-            font-size: 20px;
-            font-weight: 600;
+            font-size: 22px;
+            font-weight: 700;
             margin-bottom: 15px;
+            color: var(--text-dark);
         }
 
         .feature-desc {
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 1.5;
+            color: var(--text-light);
+            line-height: 1.6;
+            font-size: 15px;
         }
 
         /* Demo Credentials */
         .demo-box {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 25px;
-            border-radius: 15px;
-            margin-top: 50px;
-            text-align: left;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            margin-top: 60px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--coral-accent);
         }
 
         .demo-title {
-            font-size: 18px;
-            font-weight: 600;
-            margin-bottom: 15px;
+            font-size: 22px;
+            font-weight: 700;
+            margin-bottom: 25px;
+            color: var(--text-dark);
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+        }
+
+        .demo-title i {
+            background: var(--coral-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .demo-list {
             list-style: none;
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 20px;
         }
 
         .demo-item {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 15px;
-            border-radius: 10px;
+            background: rgba(255, 107, 107, 0.05);
+            padding: 20px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255, 107, 107, 0.1);
+        }
+
+        .demo-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 107, 107, 0.08);
         }
 
         .demo-role {
             display: inline-block;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 3px 10px;
-            border-radius: 12px;
-            font-size: 12px;
-            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
             margin-left: 10px;
+            letter-spacing: 0.5px;
+        }
+
+        .chef { background: #FFE8E6; color: var(--coral-primary); }
+        .waiter { background: #FFF0E6; color: var(--coral-secondary); }
+        .cashier { background: #FFF8E6; color: var(--coral-accent); }
+        .manager { background: #E6F0FF; color: #6B8BFF; }
+
+        .role-desc {
+            font-size: 13px;
+            color: var(--text-light);
+            margin-top: 8px;
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            padding: 30px;
-            color: rgba(255, 255, 255, 0.7);
-            font-size: 14px;
-            background: rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            color: var(--text-light);
+            font-size: 15px;
+            background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        .services-info {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .service-tag {
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--coral-primary);
+            padding: 8px 15px;
+            border-radius: 50px;
+            font-size: 13px;
+            font-weight: 600;
         }
 
         /* Responsive */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 44px;
+            }
+
+            .container {
+                padding: 40px 30px;
+            }
+        }
+
         @media (max-width: 768px) {
+            .header {
+                padding: 20px;
+                flex-direction: column;
+                gap: 20px;
+            }
+
             .hero-title {
                 font-size: 36px;
             }
@@ -194,23 +331,81 @@
                 grid-template-columns: 1fr;
             }
         }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .login-btn {
+                padding: 12px 24px;
+                font-size: 15px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+
+            .demo-box {
+                padding: 25px;
+            }
+        }
+
+        /* Animation for cards */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .feature-card, .demo-box {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .feature-card:nth-child(1) { animation-delay: 0.1s; }
+        .feature-card:nth-child(2) { animation-delay: 0.2s; }
+        .feature-card:nth-child(3) { animation-delay: 0.3s; }
+        .feature-card:nth-child(4) { animation-delay: 0.4s; }
+        .demo-box { animation-delay: 0.5s; }
+
+        /* User badge for logged in users */
+        .user-badge {
+            background: var(--coral-gradient);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 <body>
 <!-- Header -->
 <div class="header">
     <div class="logo">
-        🍽️ Restaurant Management System
+        <div class="logo-icon">
+            <i class="fas fa-utensils"></i>
+        </div>
+        <div>Restaurant<span></span> Management</div>
     </div>
     <button class="login-btn" onclick="goToLogin()">
-        🔐 Login to System
+        <i class="fas fa-sign-in-alt"></i> Login to System
     </button>
 </div>
 
 <!-- Main Content -->
 <div class="container">
     <div class="hero-section">
-        <h1 class="hero-title">Modern Restaurant Management Solution</h1>
+        <h1 class="hero-title">Revolutionize Your Restaurant Operations</h1>
         <p class="hero-subtitle">
             A comprehensive microservices-based system designed to streamline restaurant operations.
             Manage orders, inventory, billing, and staff with real-time updates across all departments.
@@ -220,67 +415,82 @@
         <!-- Features Grid -->
         <div class="features-grid">
             <div class="feature-card">
-                <div class="feature-icon">👨‍🍳</div>
+                <div class="feature-icon">
+                    <i class="fas fa-cheese"></i>
+                </div>
                 <div class="feature-title">Chef System</div>
-                <p class="feature-desc">Real-time kitchen display, order tracking, and preparation management</p>
+                <p class="feature-desc">Real-time kitchen display, order tracking, and preparation management with ingredient alerts.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">👨‍💼</div>
+                <div class="feature-icon">
+                    <i class="fas fa-concierge-bell"></i>
+                </div>
                 <div class="feature-title">Waiter System</div>
-                <p class="feature-desc">Table management, order taking, and customer service interface</p>
+                <p class="feature-desc">Table management, order taking, and customer service interface with live updates.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">💰</div>
+                <div class="feature-icon">
+                    <i class="fas fa-cash-register"></i>
+                </div>
                 <div class="feature-title">Cashier System</div>
-                <p class="feature-desc">Billing, payment processing, and daily sales reporting</p>
+                <p class="feature-desc">Smart billing, payment processing, and daily sales reporting with digital receipts.</p>
             </div>
 
             <div class="feature-card">
-                <div class="feature-icon">📊</div>
-                <div class="feature-title">Manager System</div>
-                <p class="feature-desc">Complete oversight, staff management, and business analytics</p>
+                <div class="feature-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="feature-title">Manager Dashboard</div>
+                <p class="feature-desc">Complete oversight with staff management, inventory control, and business analytics.</p>
             </div>
         </div>
 
         <!-- Demo Credentials -->
         <div class="demo-box">
             <div class="demo-title">
-                🚀 Demo Credentials (All passwords: 1234)
+                <i class="fas fa-rocket"></i> Try Our Demo Environment
             </div>
             <ul class="demo-list">
                 <li class="demo-item">
                     <strong>Username:</strong> chef
-                    <span class="demo-role">CHEF</span>
-                    <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px;">Kitchen order management</div>
+                    <span class="demo-role chef">CHEF</span>
+                    <div class="role-desc">Kitchen order management and preparation tracking</div>
                 </li>
                 <li class="demo-item">
                     <strong>Username:</strong> waiter1
-                    <span class="demo-role">WAITER</span>
-                    <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px;">Table & order management</div>
+                    <span class="demo-role waiter">WAITER</span>
+                    <div class="role-desc">Table & order management with customer service</div>
                 </li>
                 <li class="demo-item">
                     <strong>Username:</strong> cashier
-                    <span class="demo-role">CASHIER</span>
-                    <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px;">Billing & payments</div>
+                    <span class="demo-role cashier">CASHIER</span>
+                    <div class="role-desc">Billing, payments, and digital receipt generation</div>
                 </li>
                 <li class="demo-item">
                     <strong>Username:</strong> manager
-                    <span class="demo-role">MANAGER</span>
-                    <div style="font-size: 12px; color: rgba(255,255,255,0.7); margin-top: 5px;">Full system control</div>
+                    <span class="demo-role manager">MANAGER</span>
+                    <div class="role-desc">Full system control and business analytics</div>
                 </li>
             </ul>
+            <div style="margin-top: 25px; padding: 15px; background: rgba(255, 164, 27, 0.1); border-radius: 12px; color: #E67E22; font-weight: 600;">
+                <i class="fas fa-key"></i> All demo accounts use password: <strong>1234</strong>
+            </div>
         </div>
     </div>
 </div>
 
 <!-- Footer -->
 <div class="footer">
-    <p>Restaurant Management System © 2024 | Built with Spring Boot Microservices</p>
-    <p style="margin-top: 10px; font-size: 12px;">
-        Services running on: User Service (8081), Table Service (8082), Menu Service (8083), Order Service (8084), Billing Service (8085)
-    </p>
+    <p>RestaurantPro Management System © 2024 | Built with Spring Boot Microservices</p>
+    <div class="services-info">
+        <div class="service-tag">User Service (8081)</div>
+        <div class="service-tag">Table Service (8082)</div>
+        <div class="service-tag">Menu Service (8083)</div>
+        <div class="service-tag">Order Service (8084)</div>
+        <div class="service-tag">Billing Service (8085)</div>
+    </div>
 </div>
 
 <script>
@@ -293,9 +503,10 @@
         const userData = localStorage.getItem('restaurantUser');
         if (userData) {
             const user = JSON.parse(userData);
+
             // Show logged in message
             const loginBtn = document.querySelector('.login-btn');
-            loginBtn.innerHTML = `👋 Hi ${user.fullName} | Logout`;
+            loginBtn.innerHTML = `<i class="fas fa-user-circle"></i> Hi ${user.fullName} | Logout`;
             loginBtn.onclick = function() {
                 localStorage.removeItem('restaurantUser');
                 window.location.href = '/login';
@@ -303,11 +514,46 @@
 
             // Add a welcome message
             const header = document.querySelector('.header');
-            const welcomeMsg = document.createElement('div');
-            welcomeMsg.style.cssText = 'background: rgba(255,255,255,0.1); padding: 8px 15px; border-radius: 20px; font-size: 14px;';
-            welcomeMsg.innerHTML = `Logged in as <strong>${user.role}</strong>`;
-            header.insertBefore(welcomeMsg, loginBtn);
+            const userBadge = document.createElement('div');
+            userBadge.className = 'user-badge';
+            userBadge.innerHTML = `
+                <i class="fas fa-user-tag"></i>
+                ${user.role.toUpperCase()} MODE
+            `;
+            header.insertBefore(userBadge, loginBtn);
+
+            // Update the welcome message in hero section
+            const heroTitle = document.querySelector('.hero-title');
+            const heroSubtitle = document.querySelector('.hero-subtitle');
+
+            heroTitle.innerHTML = `Welcome Back, ${user.fullName}!`;
+            heroTitle.style.fontSize = '42px';
+
+            heroSubtitle.textContent = `You're logged in as ${user.role}. Explore the features below or try other demo accounts.`;
         }
+    });
+
+    // Add scroll animations
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, observerOptions);
+
+    // Observe elements for scroll animation
+    document.querySelectorAll('.feature-card, .demo-box').forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(20px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
     });
 </script>
 </body>
