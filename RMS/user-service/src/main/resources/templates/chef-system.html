@@ -3,80 +3,136 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Chef System - Kitchen Orders</title>
+    <title>Chef System - RestaurantPro</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        }
+
+        :root {
+            --coral-primary: #FF6B6B;
+            --coral-secondary: #FF8E6B;
+            --coral-accent: #FFB86B;
+            --coral-light: #FFE8E6;
+            --coral-dark: #D45D5D;
+            --coral-teal: #00C9B7;
+            --coral-purple: #6A67CE;
+            --coral-gradient: linear-gradient(135deg, #FF6B6B 0%, #FF8E6B 100%);
+            --coral-gradient-hover: linear-gradient(135deg, #FF8E6B 0%, #FF6B6B 100%);
+            --teal-gradient: linear-gradient(135deg, #00C9B7 0%, #00A8A8 100%);
+            --teal-gradient-hover: linear-gradient(135deg, #00A8A8 0%, #00C9B7 100%);
+            --purple-gradient: linear-gradient(135deg, #6A67CE 0%, #5A57BE 100%);
+            --purple-gradient-hover: linear-gradient(135deg, #5A57BE 0%, #6A67CE 100%);
+            --text-dark: #333333;
+            --text-light: #666666;
+            --shadow: 0 15px 35px rgba(255, 107, 107, 0.15);
+            --shadow-hover: 0 20px 40px rgba(255, 107, 107, 0.25);
+            --card-bg: #FFFFFF;
         }
 
         body {
-            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
-            color: white;
+            background: linear-gradient(135deg, #FFE8E6 0%, #FFF0E6 50%, #FFE6E0 100%);
             min-height: 100vh;
+            color: var(--text-dark);
         }
 
         /* Header */
         .header {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 20px 30px;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #ff6b6b;
+            background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(10px);
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 3px solid var(--coral-primary);
         }
 
-        .header h1 {
+        .logo-section {
             display: flex;
             align-items: center;
             gap: 15px;
-            font-weight: 600;
-            font-size: 28px;
         }
 
-        .header-buttons {
+        .logo-icon {
+            background: var(--coral-gradient);
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
             display: flex;
-            gap: 15px;
             align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+        }
+
+        .logo-text {
+            font-size: 24px;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            background: var(--coral-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
         .user-info {
-            background: rgba(255, 255, 255, 0.1);
-            padding: 10px 20px;
-            border-radius: 20px;
-            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .user-badge {
+            background: var(--coral-gradient);
+            color: white;
+            padding: 8px 18px;
+            border-radius: 50px;
+            font-size: 14px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
         .logout-btn {
-            background: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+            background: var(--coral-gradient);
             color: white;
             border: none;
-            padding: 12px 25px;
-            border-radius: 8px;
+            padding: 10px 25px;
+            border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 16px;
+            font-size: 14px;
             transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 8px;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
         }
 
         .logout-btn:hover {
+            background: var(--coral-gradient-hover);
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+            box-shadow: var(--shadow-hover);
         }
 
         /* Kitchen Display */
         .kitchen-display {
-            padding: 30px;
+            padding: 30px 40px;
             max-width: 1400px;
             margin: 0 auto;
         }
 
+        /* Display Header */
         .display-header {
             display: flex;
             justify-content: space-between;
@@ -89,12 +145,30 @@
         .display-title {
             font-size: 32px;
             font-weight: 700;
-            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--text-dark);
             display: flex;
             align-items: center;
             gap: 15px;
+        }
+
+        .display-title span {
+            background: var(--coral-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .kitchen-clock {
+            background: rgba(255, 107, 107, 0.1);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-family: 'Courier New', monospace;
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--coral-primary);
+            border: 2px solid rgba(255, 107, 107, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .controls {
@@ -106,79 +180,46 @@
         .btn {
             padding: 12px 25px;
             border: none;
-            border-radius: 8px;
-            font-size: 16px;
+            border-radius: 12px;
+            font-size: 15px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s;
             display: flex;
             align-items: center;
+            justify-content: center;
             gap: 10px;
+            min-width: 160px;
         }
 
         .btn:disabled {
             opacity: 0.5;
             cursor: not-allowed;
+            transform: none !important;
+            box-shadow: none !important;
         }
 
         .btn-refresh {
-            background: rgba(255, 255, 255, 0.1);
+            background: var(--coral-gradient);
             color: white;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 20px rgba(255, 107, 107, 0.3);
         }
 
         .btn-refresh:hover:not(:disabled) {
-            background: rgba(255, 255, 255, 0.2);
-        }
-
-        .btn-accept {
-            background: linear-gradient(135deg, #4ecdc4 0%, #44a08d 100%);
-            color: white;
-        }
-
-        .btn-accept:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(78, 205, 196, 0.4);
-        }
-
-        .btn-start {
-            background: linear-gradient(135deg, #ffd166 0%, #ffb347 100%);
-            color: #333;
-        }
-
-        .btn-start:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(255, 209, 102, 0.4);
-        }
-
-        .btn-ready {
-            background: linear-gradient(135deg, #06d6a0 0%, #05c793 100%);
-            color: white;
-        }
-
-        .btn-ready:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(6, 214, 160, 0.4);
-        }
-
-        .btn-history {
-            background: linear-gradient(135deg, #118ab2 0%, #0a7ea6 100%);
-            color: white;
-        }
-
-        .btn-history:hover:not(:disabled) {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(17, 138, 178, 0.4);
+            background: var(--coral-gradient-hover);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
         }
 
         /* Status Tabs */
         .status-tabs {
             display: flex;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 12px;
+            background: var(--card-bg);
+            border-radius: 15px;
             overflow: hidden;
+            box-shadow: var(--shadow);
             margin-bottom: 30px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 107, 107, 0.1);
         }
 
         .status-tab {
@@ -189,16 +230,119 @@
             font-weight: 600;
             font-size: 16px;
             transition: all 0.3s;
-            border-bottom: 3px solid transparent;
-        }
-
-        .status-tab:hover {
-            background: rgba(255, 255, 255, 0.1);
+            border-bottom: 4px solid transparent;
+            color: var(--text-light);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
 
         .status-tab.active {
-            background: rgba(255, 255, 255, 0.1);
-            border-bottom: 3px solid #ff6b6b;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1) 0%, rgba(255, 142, 107, 0.1) 100%);
+            color: var(--coral-primary);
+            border-bottom: 4px solid var(--coral-primary);
+        }
+
+        .status-tab:hover:not(.active) {
+            background: rgba(255, 107, 107, 0.05);
+            color: var(--coral-secondary);
+        }
+
+        /* Notification Badge */
+        .notification-badge {
+            background: var(--coral-primary);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 700;
+            min-width: 28px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Selected Order Actions */
+        .selected-order-info {
+            background: var(--card-bg);
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--coral-primary);
+            display: none;
+            animation: slideIn 0.5s ease;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .selected-order-info.show {
+            display: block;
+        }
+
+        .selected-order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .selected-order-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--coral-primary);
+        }
+
+        .clear-selection {
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--coral-primary);
+            border: 1px solid rgba(255, 107, 107, 0.2);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .clear-selection:hover {
+            background: rgba(255, 107, 107, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+
+        /* UPDATED BUTTON COLORS to match coral theme */
+        .btn-accept {
+            background: var(--teal-gradient);
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 201, 183, 0.3);
+        }
+
+        .btn-accept:hover:not(:disabled) {
+            background: var(--teal-gradient-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(0, 201, 183, 0.4);
+        }
+
+        .btn-ready {
+            background: var(--purple-gradient);
+            color: white;
+            box-shadow: 0 8px 20px rgba(106, 103, 206, 0.3);
+        }
+
+        .btn-ready:hover:not(:disabled) {
+            background: var(--purple-gradient-hover);
+            transform: translateY(-3px);
+            box-shadow: 0 15px 30px rgba(106, 103, 206, 0.4);
         }
 
         /* Orders Grid */
@@ -209,46 +353,26 @@
         }
 
         .order-card {
-            background: rgba(255, 255, 255, 0.05);
+            background: var(--card-bg);
             border-radius: 15px;
             padding: 25px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 107, 107, 0.1);
             transition: all 0.3s;
             position: relative;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .order-card:hover {
-            transform: translateY(-5px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-hover);
+            border-color: rgba(255, 107, 107, 0.3);
         }
 
         .order-card.selected {
-            border: 2px solid #4ecdc4;
-            box-shadow: 0 0 0 3px rgba(78, 205, 196, 0.3);
-        }
-
-        .order-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 6px;
-            height: 100%;
-        }
-
-        .order-card.pending::before {
-            background: #ff6b6b;
-        }
-
-        .order-card.preparing::before {
-            background: #ffd166;
-        }
-
-        .order-card.ready::before {
-            background: #06d6a0;
+            border: 3px solid var(--coral-primary);
+            box-shadow: 0 0 0 3px rgba(255, 107, 107, 0.2);
         }
 
         .order-header {
@@ -259,42 +383,36 @@
         }
 
         .order-id {
-            font-size: 18px;
-            font-weight: 700;
-            color: #4ecdc4;
-            background: rgba(78, 205, 196, 0.1);
-            padding: 6px 15px;
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--coral-primary);
+            background: rgba(255, 107, 107, 0.1);
+            padding: 8px 16px;
             border-radius: 20px;
-            display: inline-block;
         }
 
         .order-status {
-            padding: 8px 18px;
+            padding: 8px 16px;
             border-radius: 20px;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 0.5px;
         }
 
         .status-pending {
-            background: rgba(255, 107, 107, 0.2);
-            color: #ff6b6b;
-        }
-
-        .status-accepted {
-            background: rgba(78, 205, 196, 0.2);
-            color: #4ecdc4;
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--coral-primary);
         }
 
         .status-preparing {
-            background: rgba(255, 209, 102, 0.2);
-            color: #ffd166;
+            background: rgba(255, 184, 107, 0.1);
+            color: #FF9800;
         }
 
         .status-ready {
-            background: rgba(6, 214, 160, 0.2);
-            color: #06d6a0;
+            background: rgba(106, 103, 206, 0.1);
+            color: var(--coral-purple);
         }
 
         .order-info {
@@ -306,12 +424,15 @@
             justify-content: space-between;
             margin-bottom: 12px;
             padding-bottom: 12px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
         }
 
         .order-info-label {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-light);
             font-size: 14px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .order-info-value {
@@ -324,7 +445,7 @@
         }
 
         .order-items-title {
-            color: rgba(255, 255, 255, 0.6);
+            color: var(--text-light);
             font-size: 14px;
             margin-bottom: 10px;
             display: flex;
@@ -336,15 +457,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 15px;
-            background: rgba(255, 255, 255, 0.03);
+            padding: 10px 15px;
+            background: rgba(255, 107, 107, 0.05);
             border-radius: 8px;
             margin-bottom: 8px;
-            transition: all 0.2s;
-        }
-
-        .order-item:hover {
-            background: rgba(255, 255, 255, 0.05);
         }
 
         .item-name {
@@ -353,7 +469,7 @@
         }
 
         .item-quantity {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 107, 107, 0.1);
             padding: 4px 12px;
             border-radius: 12px;
             font-weight: 600;
@@ -368,32 +484,58 @@
         }
 
         .item-pending {
-            background: rgba(255, 107, 107, 0.2);
-            color: #ff6b6b;
-        }
-
-        .item-preparing {
-            background: rgba(255, 209, 102, 0.2);
-            color: #ffd166;
+            background: rgba(255, 107, 107, 0.1);
+            color: var(--coral-primary);
         }
 
         .item-ready {
-            background: rgba(6, 214, 160, 0.2);
-            color: #06d6a0;
+            background: rgba(106, 103, 206, 0.1);
+            color: var(--coral-purple);
         }
 
-        .order-actions {
+        .card-actions {
             display: flex;
             gap: 10px;
             margin-top: 20px;
             flex-wrap: wrap;
         }
 
-        .order-action-btn {
+        .card-action-btn {
             flex: 1;
-            min-width: 120px;
+            min-width: 140px;
             padding: 10px;
             font-size: 14px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+
+        /* Messages */
+        .message {
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 25px;
+            display: none;
+            animation: slideIn 0.5s ease;
+            border-left: 5px solid;
+        }
+
+        .message.success {
+            background: rgba(0, 201, 183, 0.1);
+            color: #00897B;
+            border-left-color: var(--coral-teal);
+        }
+
+        .message.error {
+            background: rgba(244, 67, 54, 0.1);
+            color: #C62828;
+            border-left-color: #f44336;
         }
 
         /* Loading & Empty States */
@@ -404,11 +546,11 @@
         }
 
         .loading-spinner {
-            border: 4px solid rgba(255, 255, 255, 0.1);
-            border-top: 4px solid #4ecdc4;
+            border: 3px solid rgba(255, 107, 107, 0.1);
+            border-top: 3px solid var(--coral-primary);
             border-radius: 50%;
-            width: 60px;
-            height: 60px;
+            width: 50px;
+            height: 50px;
             animation: spin 1s linear infinite;
             margin: 0 auto 20px;
         }
@@ -422,169 +564,116 @@
             text-align: center;
             padding: 60px;
             grid-column: 1 / -1;
-            color: rgba(255, 255, 255, 0.5);
         }
 
         .empty-icon {
             font-size: 60px;
             margin-bottom: 20px;
             opacity: 0.3;
-        }
-
-        /* Timer */
-        .order-timer {
-            background: rgba(255, 107, 107, 0.1);
-            padding: 10px 15px;
-            border-radius: 10px;
-            margin-top: 15px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 14px;
-        }
-
-        .timer-icon {
-            color: #ff6b6b;
-        }
-
-        /* Messages */
-        .message {
-            padding: 20px;
-            border-radius: 10px;
-            margin-bottom: 25px;
-            display: none;
-            animation: slideIn 0.5s ease;
-            border: 1px solid;
-        }
-
-        @keyframes slideIn {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .message.success {
-            background: rgba(6, 214, 160, 0.1);
-            color: #06d6a0;
-            border-color: rgba(6, 214, 160, 0.3);
-        }
-
-        .message.error {
-            background: rgba(255, 107, 107, 0.1);
-            color: #ff6b6b;
-            border-color: rgba(255, 107, 107, 0.3);
-        }
-
-        /* Notification Badge */
-        .notification-badge {
-            background: #ff6b6b;
-            color: white;
-            padding: 4px 10px;
-            border-radius: 10px;
-            font-size: 12px;
-            font-weight: 700;
-            margin-left: 8px;
+            color: var(--coral-primary);
         }
 
         /* Responsive */
-        @media (max-width: 768px) {
+        @media (max-width: 1200px) {
             .orders-grid {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 992px) {
+            .kitchen-display {
+                padding: 20px;
             }
 
             .header {
+                padding: 20px;
                 flex-direction: column;
                 gap: 15px;
-                text-align: center;
             }
 
-            .header-buttons {
+            .user-info {
+                width: 100%;
+                justify-content: space-between;
+            }
+
+            .display-header {
                 flex-direction: column;
-                width: 100%;
-            }
-
-            .btn {
-                width: 100%;
-                justify-content: center;
+                align-items: stretch;
             }
 
             .controls {
                 width: 100%;
             }
 
-            .status-tabs {
-                flex-direction: column;
+            .btn {
+                width: 100%;
             }
         }
 
-        /* Kitchen Clock */
-        .kitchen-clock {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-family: 'Courier New', monospace;
-            font-size: 24px;
-            font-weight: 700;
-            color: #4ecdc4;
-            border: 2px solid rgba(78, 205, 196, 0.3);
-            margin-left: 20px;
+        @media (max-width: 768px) {
+            .orders-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .status-tabs {
+                flex-direction: column;
+            }
+
+            .order-actions {
+                flex-direction: column;
+            }
+
+            .card-action-btn {
+                width: 100%;
+            }
         }
 
-        /* Selected Order Highlight */
-        .selected-order-info {
-            background: rgba(78, 205, 196, 0.1);
-            border: 2px solid rgba(78, 205, 196, 0.3);
-            border-radius: 15px;
-            padding: 25px;
-            margin-bottom: 30px;
-            display: none;
-        }
+        @media (max-width: 480px) {
+            .logo-text {
+                font-size: 20px;
+            }
 
-        .selected-order-info.show {
-            display: block;
-            animation: slideIn 0.5s ease;
-        }
+            .user-badge, .logout-btn {
+                font-size: 12px;
+                padding: 6px 12px;
+            }
 
-        .selected-order-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-        }
+            .display-title {
+                font-size: 24px;
+            }
 
-        .selected-order-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #4ecdc4;
-        }
+            .kitchen-clock {
+                font-size: 16px;
+                padding: 8px 16px;
+            }
 
-        .clear-selection {
-            background: rgba(255, 107, 107, 0.2);
-            color: #ff6b6b;
-            border: 1px solid rgba(255, 107, 107, 0.3);
-            padding: 8px 15px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-
-        .clear-selection:hover {
-            background: rgba(255, 107, 107, 0.3);
+            .order-card {
+                padding: 20px;
+            }
         }
     </style>
 </head>
 <body>
 <!-- Header -->
 <div class="header">
-    <h1>
-        👨‍🍳 KITCHEN DISPLAY SYSTEM
-        <div class="kitchen-clock" id="kitchenClock">00:00:00</div>
-    </h1>
+    <div class="logo-section">
+        <div class="logo-icon">
+            <i class="fas fa-utensils"></i>
+        </div>
+        <div class="logo-text">Chef<span>Dashboard</span></div>
+    </div>
 
-    <div class="header-buttons">
-        <div class="user-info" id="welcomeUser">Chef: Master Chef</div>
+    <div class="user-info">
+        <div class="user-badge" id="userBadge">
+            <i class="fas fa-user-tag"></i>
+            CHEF MODE
+        </div>
+        <div class="kitchen-clock" id="kitchenClock">
+            <i class="fas fa-clock"></i>
+            <span>00:00:00</span>
+        </div>
         <button class="logout-btn" onclick="logout()">
-            🚪 Logout
+            <i class="fas fa-sign-out-alt"></i> Logout
         </button>
     </div>
 </div>
@@ -598,16 +687,14 @@
     <!-- Display Header -->
     <div class="display-header">
         <div class="display-title">
-            📋 KITCHEN ORDERS
+            <i class="fas fa-fire"></i>
+            <span>Kitchen Orders</span>
             <div id="pendingCount" class="notification-badge">0</div>
         </div>
 
         <div class="controls">
             <button class="btn btn-refresh" onclick="loadOrders()" id="btnRefresh">
-                🔄 Refresh Orders
-            </button>
-            <button class="btn btn-history" onclick="showOrderHistory()">
-                📊 Order History
+                <i class="fas fa-sync-alt"></i> Refresh Orders
             </button>
         </div>
     </div>
@@ -615,13 +702,13 @@
     <!-- Status Tabs -->
     <div class="status-tabs">
         <div class="status-tab active" onclick="filterOrders('PENDING')">
-            ⏳ PENDING <span id="pendingTabCount" class="notification-badge">0</span>
+            <i class="fas fa-clock"></i> PENDING <span id="pendingTabCount" class="notification-badge">0</span>
         </div>
         <div class="status-tab" onclick="filterOrders('PREPARING')">
-            🔥 PREPARING <span id="preparingTabCount" class="notification-badge">0</span>
+            <i class="fas fa-fire"></i> PREPARING <span id="preparingTabCount" class="notification-badge">0</span>
         </div>
         <div class="status-tab" onclick="filterOrders('READY')">
-            ✅ READY <span id="readyTabCount" class="notification-badge">0</span>
+            <i class="fas fa-check-circle"></i> READY <span id="readyTabCount" class="notification-badge">0</span>
         </div>
     </div>
 
@@ -629,22 +716,19 @@
     <div id="selectedOrderInfo" class="selected-order-info">
         <div class="selected-order-header">
             <div class="selected-order-title" id="selectedOrderTitle">
-                SELECTED ORDER: #<span id="selectedOrderId">NONE</span>
+                <i class="fas fa-clipboard-list"></i> SELECTED ORDER: #<span id="selectedOrderId">NONE</span>
             </div>
             <button class="clear-selection" onclick="clearSelection()">
-                ✕ Clear Selection
+                <i class="fas fa-times"></i> Clear Selection
             </button>
         </div>
 
-        <div style="display: flex; gap: 15px; margin-top: 20px; flex-wrap: wrap;">
+        <div class="order-actions">
             <button class="btn btn-accept" onclick="acceptSelectedOrder()" id="btnAccept">
-                ✅ Accept Order
-            </button>
-            <button class="btn btn-start" onclick="startPreparingOrder()" id="btnStart">
-                🔥 Start Preparing
+                <i class="fas fa-check"></i> Accept & Start Cooking
             </button>
             <button class="btn btn-ready" onclick="markSelectedOrderReady()" id="btnReady">
-                🎯 Mark as Ready
+                <i class="fas fa-check-double"></i> Mark as Ready
             </button>
         </div>
     </div>
@@ -652,7 +736,7 @@
     <!-- Orders Grid -->
     <div id="loading" class="loading">
         <div class="loading-spinner"></div>
-        <div style="margin-top: 20px; font-size: 18px; color: rgba(255, 255, 255, 0.7);">
+        <div style="margin-top: 20px; font-size: 16px; color: var(--text-light);">
             Loading kitchen orders...
         </div>
     </div>
@@ -660,11 +744,13 @@
     <div id="ordersGrid" class="orders-grid" style="display: none;"></div>
 
     <div id="emptyState" class="empty-state" style="display: none;">
-        <div class="empty-icon">🍳</div>
-        <h3 style="margin-bottom: 10px; color: rgba(255, 255, 255, 0.7);">
+        <div class="empty-icon">
+            <i class="fas fa-utensils"></i>
+        </div>
+        <h3 style="margin-bottom: 10px; color: var(--text-light);">
             No orders in this status
         </h3>
-        <p style="color: rgba(255, 255, 255, 0.5);">
+        <p style="color: var(--text-light);">
             Orders will appear here when waiters place them
         </p>
     </div>
@@ -704,7 +790,9 @@
             }
 
             // Update welcome message
-            document.getElementById('welcomeUser').textContent = `Chef: ${currentUser.fullName}`;
+            document.getElementById('userBadge').innerHTML = `
+                <i class="fas fa-user-tag"></i> CHEF: ${currentUser.fullName}
+            `;
 
             // Load initial orders
             loadOrders();
@@ -726,13 +814,13 @@
         ordersGrid.style.display = 'none';
         emptyState.style.display = 'none';
         btnRefresh.disabled = true;
-        btnRefresh.innerHTML = '🔄 Loading...';
+        btnRefresh.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
 
         try {
             const response = await fetch('http://localhost:8084/api/orders');
             if (response.ok) {
                 allOrders = await response.json();
-                console.log('Loaded orders:', allOrders); // Debug
+                console.log('Loaded orders:', allOrders);
                 displayOrders();
                 updateOrderCounts();
             } else {
@@ -742,7 +830,7 @@
             showError('Error connecting to Order Service. Make sure it\'s running on port 8084.');
         } finally {
             btnRefresh.disabled = false;
-            btnRefresh.innerHTML = '🔄 Refresh Orders';
+            btnRefresh.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh Orders';
         }
     }
 
@@ -755,14 +843,11 @@
 
         // Filter orders based on current tab
         const filteredOrders = allOrders.filter(order => {
-            console.log('Order:', order.orderId, 'Status:', order.status); // Debug
             if (currentFilter === 'PENDING') return order.status === 'PENDING';
             if (currentFilter === 'PREPARING') return order.status === 'PREPARING' || order.status === 'ACCEPTED';
             if (currentFilter === 'READY') return order.status === 'READY';
             return true;
         });
-
-        console.log('Filtered orders for', currentFilter + ':', filteredOrders.length); // Debug
 
         if (filteredOrders.length === 0) {
             ordersGrid.style.display = 'none';
@@ -783,10 +868,8 @@
                 orderCard.classList.add('selected');
             }
 
-            // Calculate waiting time
+            // Calculate order time
             const orderedTime = new Date(order.createdAt);
-            const now = new Date();
-            const waitingMinutes = Math.floor((now - orderedTime) / (1000 * 60));
 
             // Determine display status
             let displayStatus = order.status;
@@ -799,55 +882,56 @@
             }
 
             orderCard.innerHTML = `
-            <div class="order-header">
-                <div class="order-id">ORDER #${order.orderId.substring(0, 8)}</div>
-                <div class="order-status status-${displayClass}">
-                    ${displayStatus}
+                <div class="order-header">
+                    <div class="order-id">
+                        <i class="fas fa-hashtag"></i> ${order.orderId.substring(0, 8)}
+                    </div>
+                    <div class="order-status status-${displayClass}">
+                        ${displayStatus}
+                    </div>
                 </div>
-            </div>
 
-            <div class="order-info">
-                <div class="order-info-row">
-                    <div class="order-info-label">Table</div>
-                    <div class="order-info-value">${order.tableId || 'N/A'}</div>
+                <div class="order-info">
+                    <div class="order-info-row">
+                        <div class="order-info-label">
+                            <i class="fas fa-chair"></i> Table
+                        </div>
+                        <div class="order-info-value">${order.tableId || 'N/A'}</div>
+                    </div>
+                    <div class="order-info-row">
+                        <div class="order-info-label">
+                            <i class="fas fa-clock"></i> Time
+                        </div>
+                        <div class="order-info-value">${orderedTime.toLocaleTimeString()}</div>
+                    </div>
+                    <div class="order-info-row">
+                        <div class="order-info-label">
+                            <i class="fas fa-money-bill-wave"></i> Total
+                        </div>
+                        <div class="order-info-value">Rs. ${order.totalAmount?.toFixed(2) || '0.00'}</div>
+                    </div>
                 </div>
-                <div class="order-info-row">
-                    <div class="order-info-label">Order Time</div>
-                    <div class="order-info-value">${orderedTime.toLocaleTimeString()}</div>
+
+                <div class="card-actions">
+                    ${order.status === 'PENDING' ? `
+                        <button class="card-action-btn btn-accept" onclick="acceptOrder('${order.orderId}')">
+                            <i class="fas fa-check"></i> Accept & Start Cooking
+                        </button>
+                    ` : ''}
+
+                    ${(order.status === 'PREPARING' || order.status === 'ACCEPTED') ? `
+                        <button class="card-action-btn btn-ready" onclick="markOrderReady('${order.orderId}')">
+                            <i class="fas fa-check-double"></i> Mark Ready
+                        </button>
+                    ` : ''}
+
+                    ${order.status === 'READY' ? `
+                        <button class="card-action-btn" style="background: rgba(106, 103, 206, 0.1); color: var(--coral-purple);" disabled>
+                            <i class="fas fa-check-circle"></i> Ready for Pickup
+                        </button>
+                    ` : ''}
                 </div>
-                <div class="order-info-row">
-                    <div class="order-info-label">Total Amount</div>
-                    <div class="order-info-value">Rs. ${order.totalAmount?.toFixed(2) || '0.00'}</div>
-                </div>
-            </div>
-
-            ${waitingMinutes > 0 ? `
-                <div class="order-timer">
-                    <span class="timer-icon">⏱️</span>
-                    Waiting: <strong>${waitingMinutes} minutes</strong>
-                </div>
-            ` : ''}
-
-            <div class="order-actions">
-                ${order.status === 'PENDING' ? `
-                    <button class="btn btn-accept order-action-btn" onclick="acceptOrder('${order.orderId}')">
-                        ✅ Accept & Start Cooking
-                    </button>
-                ` : ''}
-
-                ${(order.status === 'PREPARING' || order.status === 'ACCEPTED') ? `
-                    <button class="btn btn-ready order-action-btn" onclick="markOrderReady('${order.orderId}')">
-                        ✅ Mark Ready
-                    </button>
-                ` : ''}
-
-                ${order.status === 'READY' ? `
-                    <button class="btn order-action-btn" style="background: rgba(6, 214, 160, 0.2); color: #06d6a0;" disabled>
-                        ✅ Ready for Pickup
-                    </button>
-                ` : ''}
-            </div>
-        `;
+            `;
 
             ordersGrid.appendChild(orderCard);
         });
@@ -859,8 +943,6 @@
         const pendingCount = allOrders.filter(o => o.status === 'PENDING').length;
         const preparingCount = allOrders.filter(o => o.status === 'PREPARING' || o.status === 'ACCEPTED').length;
         const readyCount = allOrders.filter(o => o.status === 'READY').length;
-
-        console.log('Counts - Pending:', pendingCount, 'Preparing:', preparingCount, 'Ready:', readyCount); // Debug
 
         // Update badges
         document.getElementById('pendingCount').textContent = pendingCount;
@@ -883,10 +965,10 @@
             pendingTab.style.color = '#ff6b6b';
         }
         if (preparingCount > 0) {
-            preparingTab.style.color = '#ffd166';
+            preparingTab.style.color = '#FF9800';
         }
         if (readyCount > 0) {
-            readyTab.style.color = '#06d6a0';
+            readyTab.style.color = 'var(--coral-purple)';
         }
     }
 
@@ -928,7 +1010,6 @@
         const selectedInfo = document.getElementById('selectedOrderInfo');
         const selectedOrderId = document.getElementById('selectedOrderId');
         const btnAccept = document.getElementById('btnAccept');
-        const btnStart = document.getElementById('btnStart');
         const btnReady = document.getElementById('btnReady');
 
         selectedOrderId.textContent = order.orderId.substring(0, 8);
@@ -936,15 +1017,15 @@
 
         // Update button states based on order status
         btnAccept.disabled = order.status !== 'PENDING';
-        btnStart.style.display = 'none'; // Hide start button
         btnReady.disabled = !(order.status === 'PREPARING' || order.status === 'ACCEPTED');
 
-        // Update button text
+        // Update button text and visibility
         if (order.status === 'PENDING') {
-            btnAccept.textContent = '✅ Accept & Start Cooking';
+            btnAccept.style.display = 'flex';
+            btnAccept.innerHTML = '<i class="fas fa-check"></i> Accept & Start Cooking';
         } else if (order.status === 'PREPARING' || order.status === 'ACCEPTED') {
             btnAccept.style.display = 'none';
-            btnReady.textContent = '✅ Mark Ready';
+            btnReady.innerHTML = '<i class="fas fa-check-double"></i> Mark Ready';
         }
     }
 
@@ -959,7 +1040,6 @@
     // ==================== ORDER ACTIONS ====================
     async function acceptOrder(orderId) {
         try {
-            console.log('Accepting order:', orderId); // Debug
             const response = await fetch(`http://localhost:8084/api/orders/${orderId}/status/PREPARING`, {
                 method: 'PUT'
             });
@@ -1039,16 +1119,15 @@
         window.location.href = '/';
     }
 
-    function showOrderHistory() {
-        alert('Order history feature will be implemented in the next version!');
-    }
-
     // ==================== KITCHEN CLOCK ====================
     function startKitchenClock() {
         function updateClock() {
             const now = new Date();
             const timeString = now.toLocaleTimeString('en-US', { hour12: false });
-            document.getElementById('kitchenClock').textContent = timeString;
+            document.getElementById('kitchenClock').innerHTML = `
+                <i class="fas fa-clock"></i>
+                <span>${timeString}</span>
+            `;
         }
 
         updateClock();

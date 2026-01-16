@@ -6,10 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="8b15539a-0619-4b23-b178-86e8c11fde87" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/home.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/home.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/login.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/cashier-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/cashier-system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/chef-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/chef-system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/manager-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/manager-system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/waiter-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/waiter-system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/cashier-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/cashier-system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/chef-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/chef-system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/waiter-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/waiter-system.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -210,8 +213,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.UserServiceApplication" />
         <item itemvalue="Application.TableServiceApplication" />
+        <item itemvalue="Application.UserServiceApplication" />
         <item itemvalue="Application.BillingServiceApplication" />
         <item itemvalue="Application.OrderServiceApplication" />
         <item itemvalue="Application.MenuServiceApplication" />
