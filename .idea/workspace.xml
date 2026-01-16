@@ -5,7 +5,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="8b15539a-0619-4b23-b178-86e8c11fde87" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/entity/MenuIngredient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/repository/IngredientRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/repository/MenuIngredientRepository.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/controller/MenuController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/controller/MenuController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/service/MenuService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/menu-service/src/main/java/com/restaurant/menu/service/MenuService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/controller/OrderController.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/controller/OrderController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/repository/OrderItemRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/repository/OrderItemRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/service/OrderService.java" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/order-service/src/main/java/com/restaurant/order/service/OrderService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/manager-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/manager-system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/waiter-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/src/main/resources/templates/waiter-system.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/manager-system.html" beforeDir="false" afterPath="$PROJECT_DIR$/RMS/user-service/target/classes/templates/manager-system.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,15 +39,15 @@
     &quot;assignee&quot;: &quot;HotChicken9405&quot;
   }
 }</component>
-  <component name="GithubPullRequestsUISettings">{
-  &quot;selectedUrlAndAccountId&quot;: {
-    &quot;url&quot;: &quot;https://github.com/HotChicken9405/RestaurantManagementSystem.git&quot;,
-    &quot;accountId&quot;: &quot;1e86e072-5740-4ad7-9ab9-98909a10b4a3&quot;
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/HotChicken9405/RestaurantManagementSystem.git",
+    "accountId": "6b9a8b89-322e-4fbc-9254-ce65c81e43ea"
   }
-}</component>
-  <component name="HttpClientOnboardingState"><![CDATA[{
-  "isOnboardingCommentShown": true
 }]]></component>
+  <component name="HttpClientOnboardingState">{
+  &quot;isOnboardingCommentShown&quot;: true
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -48,6 +59,11 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "ASKED_SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "Application.BillingServiceApplication.executor": "Run",
+    "Application.MenuServiceApplication.executor": "Run",
+    "Application.OrderServiceApplication.executor": "Run",
+    "Application.TableServiceApplication.executor": "Run",
+    "Application.UserServiceApplication.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RequestMappingsPanelOrder0": "0",
     "RequestMappingsPanelOrder1": "1",
@@ -66,7 +82,7 @@
     "git-widget-placeholder": "Ravisha",
     "ignore.virus.scanning.warn.message": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/HP/Desktop/Test/RestaurantManagementSystem",
+    "last_opened_file_path": "C:/Users/User/OneDrive/Desktop/SE/RestaurantManagementSystem",
     "nodejs_package_manager_path": "npm",
     "run.configurations.included.in.services": "true",
     "vue.rearranger.settings.migration": "true"
@@ -75,6 +91,7 @@
   <component name="RunDashboard">
     <option name="configurationTypes">
       <set>
+        <option value="Application" />
         <option value="KtorApplicationConfigurationType" />
         <option value="MicronautRunConfigurationType" />
         <option value="QuarkusRunConfigurationType" />
@@ -83,7 +100,7 @@
     </option>
     <option name="configurationStatuses">
       <map>
-        <entry key="SpringBootApplicationConfigurationType">
+        <entry key="Application">
           <value>
             <map>
               <entry key="BillingServiceApplication" value="STOPPED" />
@@ -97,7 +114,7 @@
       </map>
     </option>
   </component>
-  <component name="RunManager" selected="Spring Boot.UserServiceApplication">
+  <component name="RunManager" selected="Application.UserServiceApplication">
     <configuration name="BillingServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.restaurant.billing.BillingServiceApplication" />
       <module name="billing-service" />
@@ -124,13 +141,38 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="BillingServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
-      <module name="billing-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.restaurant.billing.BillingServiceApplication" />
+    <configuration name="OrderServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.restaurant.order.OrderServiceApplication" />
+      <module name="order-service" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.restaurant.billing.*" />
+          <option name="PATTERN" value="com.restaurant.order.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="TableServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.restaurant.table.TableServiceApplication" />
+      <module name="table-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.restaurant.table.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="UserServiceApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.restaurant.user.UserServiceApplication" />
+      <module name="user-service" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.restaurant.user.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -145,20 +187,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="OrderServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
-      <module name="order-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.restaurant.order.OrderServiceApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.restaurant.order.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <configuration name="TableServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="table-service" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.restaurant.table.TableServiceApplication" />
@@ -166,37 +194,15 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="UserServiceApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" temporary="true" nameIsGenerated="true">
-      <option name="FRAME_DEACTIVATION_UPDATE_POLICY" value="UnknownPolicyInFreeMode" />
-      <module name="user-service" />
-      <option name="SPRING_BOOT_MAIN_CLASS" value="com.restaurant.user.UserServiceApplication" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.restaurant.user.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Spring Boot.UserServiceApplication" />
-        <item itemvalue="Spring Boot.OrderServiceApplication" />
-        <item itemvalue="Spring Boot.BillingServiceApplication" />
+        <item itemvalue="Application.UserServiceApplication" />
+        <item itemvalue="Application.TableServiceApplication" />
+        <item itemvalue="Application.OrderServiceApplication" />
         <item itemvalue="Application.MenuServiceApplication" />
         <item itemvalue="Application.BillingServiceApplication" />
       </list>
     </recent_temporary>
-  </component>
-  <component name="SharedIndexes">
-    <attachedChunks>
-      <set>
-        <option value="bundled-jdk-30f59d01ecdd-26cb7f24e5b0-intellij.indexing.shared.core-IU-253.29346.138" />
-        <option value="bundled-js-predefined-d6986cc7102b-9b0f141eb926-JavaScript-IU-253.29346.138" />
-      </set>
-    </attachedChunks>
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -214,5 +220,16 @@
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/RMS/user-service/src/main/java/com/restaurant/user/UserServiceApplication.java</url>
+          <line>6</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

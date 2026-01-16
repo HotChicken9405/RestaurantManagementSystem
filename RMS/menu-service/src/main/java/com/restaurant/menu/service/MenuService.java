@@ -1,11 +1,15 @@
 package com.restaurant.menu.service;
 
+import com.restaurant.menu.entity.Ingredient;
+import com.restaurant.menu.entity.MenuIngredient;
 import com.restaurant.menu.entity.MenuItem;
+import com.restaurant.menu.repository.IngredientRepository;
+import com.restaurant.menu.repository.MenuIngredientRepository;
 import com.restaurant.menu.repository.MenuRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class MenuService {
@@ -13,28 +17,44 @@ public class MenuService {
     @Autowired
     private MenuRepository menuRepository;
 
-    public List<MenuItem> getAllMenuItems() {
-        return menuRepository.findAll();
+    @Autowired
+    private IngredientRepository ingredientRepository;
+
+    @Autowired
+    private MenuIngredientRepository menuIngredientRepository;
+
+    // ... existing methods ...
+
+    // Get ingredients for a menu item
+    public List<MenuIngredient> getIngredientsForMenuItem(String itemId) {
+        return menuIngredientRepository.findByMenuItem_ItemId(itemId);
     }
 
-    public List<MenuItem> getAvailableMenuItems() {
-        return menuRepository.findByIsAvailableTrue();
+    // Update ingredient stock
+    public Ingredient updateIngredientStock(String ingredientId, Double quantityChange) {
+        Optional<Ingredient> optionalIngredient = ingredientRepository.findById(ingredientId);
+
+        if (optionalIngredient.isPresent()) {
+            Ingredient ingredient = optionalIngredient.get();
+            Double newQuantity = ingredient.getCurrentQuantity() + quantityChange;
+
+            // Ensure quantity doesn't go negative
+            if (newQuantity < 0) newQuantity = 0.0;
+
+            ingredient.setCurrentQuantity(newQuantity);
+            return ingredientRepository.save(ingredient);
+        }
+
+        throw new RuntimeException("Ingredient not found with id: " + ingredientId);
     }
 
-    public MenuItem createMenuItem(MenuItem menuItem) {
-        return menuRepository.save(menuItem);
+    // Get all ingredients
+    public List<Ingredient> getAllIngredients() {
+        return ingredientRepository.findAll();
     }
 
-    public MenuItem updateMenuItem(String itemId, MenuItem menuItem) {
-        MenuItem existing = menuRepository.findById(itemId)
-                .orElseThrow(() -> new RuntimeException("Menu item not found"));
-
-        existing.setItemName(menuItem.getItemName());
-        existing.setDescription(menuItem.getDescription());
-        existing.setPrice(menuItem.getPrice());
-        existing.setCategory(menuItem.getCategory());
-        existing.setIsAvailable(menuItem.getIsAvailable());
-
-        return menuRepository.save(existing);
+    // Get ingredient by ID
+    public Optional<Ingredient> getIngredientById(String ingredientId) {
+        return ingredientRepository.findById(ingredientId);
     }
 }

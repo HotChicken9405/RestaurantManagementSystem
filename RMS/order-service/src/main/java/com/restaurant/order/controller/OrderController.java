@@ -64,4 +64,10 @@ public class OrderController {
     public OrderItem createOrderItem(@RequestBody OrderItem orderItem) {
         return orderService.createOrderItem(orderItem);
     }
+
+
+    @GetMapping("/{orderId}/items")
+    public List<OrderItem> getOrderItems(@PathVariable String orderId) {
+        return orderService.getOrderItemsByOrderId(orderId);
+    }
 }

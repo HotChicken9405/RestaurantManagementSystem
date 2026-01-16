@@ -70,10 +70,17 @@ public class OrderService {
 
         order.setStatus(Order.OrderStatus.COMPLETED);
         return orderRepository.save(order);
+
+
     }
 
     // Create order item
     public OrderItem createOrderItem(OrderItem orderItem) {
         return orderItemRepository.save(orderItem);
+    }
+
+
+    public List<OrderItem> getOrderItemsByOrderId(String orderId) {
+        return orderItemRepository.findByOrder_OrderId(orderId);
     }
 }
